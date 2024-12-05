@@ -36,3 +36,19 @@ If we power on the terminal using the **P** button and try to establish a serial
 Now we no longer get smoke if we try to establish a serial connection but the terminal window tells us that our settings are incorrect.  Looking at the settings, we already know that the port to use is `USB0`.  However we need to determine the settings to use for the `Baud rate`, `Parity`, `Data`, `Stop bits` and `Flow Control` parameters.  
 
 It’s clear now that we should be able to determine these settings from the pile of paper shreds we collected in the previous objective.  If only there was a way to reconstruct the original document!
+
+The hints make this task quite easy for us by pointing us towards a Python script called `heuristic_edge_detection.py`.  Just by running this script and pointing it towards the folder with the paper slices in it, we are given a reconstructed image.  It needs to be flipped horizontally and edited very slightly, but the end result is a very useful document which just so happens to have all the information we’re looking for.  
+![image](https://github.com/user-attachments/assets/a1ae7a87-4577-41d2-aa41-0959347bd6ba)
+
+- Port: USB0
+- Baud: 115200
+- Parity: Even
+- Data: 7 Bits
+- Stop Bits: 1 bit
+- Flow Ctrl: RTS
+
+When we press the **S** button we get a successful serial connection 😊
+
+![image](https://github.com/user-attachments/assets/ef3f7b47-41f2-4908-b76f-20cd6395c051)
+
+
