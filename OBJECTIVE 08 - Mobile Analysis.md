@@ -167,9 +167,11 @@ We can now `grep` for these values and find `/universal/res/values/strings.xml` 
     <string name="iv">Q2hlY2tNYXRlcml4</string>
 ```
 
-At this point I tried using Cyberchef to decode the encrypted values found in `DatabaseHelper.smali`, but it became apparent that I needed some kind of *Authentication tag*….so I asked [ChatGPT](https://chatgpt.com/) about this and it explained that AES-GCM normally appends a *16-byte tag* to the ciphertext and therefore I would need to split the last 16 bytes from the ciphertext for each entry and use that as my *authentication tag*.  ChatGPT also conveniently provided me with a python script I could use to decode the entries.
+At this point I tried using Cyberchef to decode the encrypted values found in `DatabaseHelper.smali`, but it became apparent that I needed some kind of *Authentication tag*….so I asked [ChatGPT](https://chatgpt.com/) about this and it explained that AES-GCM normally appends a *16-byte tag* to the ciphertext and therefore I would need to split the last 16 bytes from the ciphertext for each entry and use that as my *authentication tag*.  ChatGPT also conveniently provided me with [a python script](Code/mobile_analysis_database_decrypt.py) which I could use to decode the entries.
 
-Rather than entering all the entries one by one, I scrolled through DatabaseHelper.smali looking for something that looks a bit different and sure enough, at the end of the file I noticed a considerably larger chunk of encoded text:
+Rather than entering all the entries one by one, I scrolled through `DatabaseHelper.smali` looking for something that looks a bit different and sure enough, at the end of the file I noticed a considerably larger chunk of encoded text:
+
+```javascript
     .line 39
     const-string v0, "IVrt+9Zct4oUePZeQqFwyhBix8cSCIxtsa+lJZkMNpNFBgoHeJlwp73l2oyEh1Y6AfqnfH7gcU9Yfov6u70cUA2/OwcxVt7Ubdn0UD2kImNsclEQ9M8PpnevBX3mXlW2QnH8+Q+SC7JaMUc9CIvxB2HYQG2JujQf6skpVaPAKGxfLqDj+2UyTAVLoeUlQjc18swZVtTQO7Zwe6sTCYlrw7GpFXCAuI6Ex29gfeVIeB7pK7M4kZGy3OIaFxfTdevCoTMwkoPvJuRupA6ybp36vmLLMXaAWsrDHRUbKfE6UKvGoC9d5vqmKeIO9elASuagxjBJ"
 So, I popped this interesting looking ciphertext into the Python script that ChatGPT so kindly created for me and deciphered it into an interesting SQL command:
@@ -179,8 +181,10 @@ CREATE TRIGGER DeleteIfInsertedSpecificValue
     BEGIN
         DELETE FROM NormalList WHERE Item = 'KGfb0vd4u/4EWMN0bp035hRjjpMiL4NQurjgHIQHNaRaDnIYbKQ9JusGaa1aAkGEVV8=';
     END;
+```
 
 Once again, we find that there is a specific value that is being removed from the naughty and nice lists… all that remains is for us to decrypt the ciphertext containing this value and we get:
-Decoded String: Joshua, Birmingham, United Kingdom
 
-And finally we have our answer – this time it was Joshua from Birmingham who was being left out!
+`Decoded String: Joshua, Birmingham, United Kingdom`
+
+And finally we have our answer – this time it was **Joshua** from **Birmingham** who was intentionally being left out!
