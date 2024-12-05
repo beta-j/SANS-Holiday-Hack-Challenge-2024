@@ -15,6 +15,60 @@ To achieve the silver medal, you can just use your cybersecurity knowledge (and 
 
 As a short-cut we can copy and paste the contents of `wordSets` into a csv file and use that to create a spreadsheet that sorts the elements into the correct groups:
 
+Array Index|Round 1|Round 2|Round 3|Round 4
+---:|:---:|:---:|:---:|:---:|
+0|Tinsel|Nmap|AES|IGMP|
+5|Garland|netcat|RSA|IPX
+10|Star|Wireshark|Blowfish|IP
+14|Lights|Nessus|3DES|ICMP
+ | | | | |
+1|Sleigh|burp|WEP|TLS
+3|Bag|OWASP|Zap|WPA2|SSL
+7|Mittens|Nikto|TKIP|IPSec
+9|Gifts|wfuzz|LEAP|SSH
+ | | | | |
+2|Belafonte|Frida|Symmetric|Ethernet
+6|Jingle Bells|Cycript|Asymmetric|PPP
+11|Crosby|AppMon|hash|IEEE 802.11
+12|White Christmas|apktool|hybrid|ARP
+| | | | |				
+4|Comet|Metasploit|Caesar|HTTP
+8|Vixen|Cobalt Strike|One-time Pad|FTP
+13|Prancer|HAVOC|Ottendorf|SMTP
+15|Blitzen|Empire|Scytale|DNS
 
+In case you’re curious, the answers fall into the following sub-categories:
+
+**Round 1 - Christmas :**
+|    |     |     |     |     |
+|---:|:---:|:---:|:---:|:---:|
+|__Decorations:__|Tinsel|Garland|Star|Lights
+|__Xmas Motifs:__|Sleigh|Bag|Mittens|Gifts
+|__Carols:__|Belafonte|	Jingle Bells|	Crosby|	White Christmas
+|__Reindeer:__|	Comet|	Vixen|	Prancer|	Blitzen
+
+**Round 2 – Cybersecurity Tools:**
+|    |     |     |     |     |
+|---:|:---:|:---:|:---:|:---:|
+|__Assessment Tools:__|	Nmap|	netcat|	Wireshark|	Nessus
+|__WebApp Testing:__|	burp|	OWASP| Zap|	Nikto|	wfuzz
+|__Mobile App Testing:__|	Frida|	Cycript|	AppMon|	apktool
+|__C2 (Command & Control):__|	Metasploit|	Cobalt Strike|	HAVOC|	Empire
+
+**Round 3 – Encryption:**
+|    |     |     |     |     |
+|---:|:---:|:---:|:---:|:---:|
+|__Cryptographic Algorithms:__|	AES|	RSA|	Blowfish|	3DES
+|__Wi-Fi Encryption:__|	WEP|	WPA2|	TKIP|	LEAP
+|__Types of Cryptography:__|	Symmetric|	Asymmetric|	Hash|	Hybrid
+|__Classical Ciphers:__|	Caeser|	One-Time Pad|	Ottendorf|	Scytale
+
+**Round 4 – Networking**
+|    |     |     |     |     |
+|---:|:---:|:---:|:---:|:---:|
+|__Internet Protocols:__|	IGMP	IPX	IP	ICMP
+|__Security Protocols:__|	TLS	SSL	IPSec	SSH
+|__Network Technologies:__|	Ethernet	PPP	IEEE 802.11	ARP
+|__Application Layer Protocols:__|	HTTP	FTP	SMTP	DNS
 
 
