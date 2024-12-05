@@ -87,7 +87,7 @@ So the correct array is `serial= [3,9,2,7,1,3]`
 
 With all this information at hand, we can make a simple curl POST request with our `requestID`, the value of `serial` and `voltage` to the URI for API v1; [https://hhc24-hardwarehacking.holidayhackchallenge.com/api/v1/complete](https://hhc24-hardwarehacking.holidayhackchallenge.com/api/v1/complete)
 
-I used a simple Python Script for this (repurposing part of what I used for brute-forcing the Frosty Keypad). After running the code, I can see that I was awarded the gold medal for the challenge – hooray!
+I used [a simple Python Script](Code/hardware_hacking_bruteforce.py) for this (repurposing part of what I used for brute-forcing the Frosty Keypad). After running the code, I can see that I was awarded the gold medal for the challenge – hooray!
 
 
 
