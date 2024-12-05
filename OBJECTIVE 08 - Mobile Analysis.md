@@ -75,7 +75,7 @@ Archive:  SantaSwipeSecure.zip
  extracting: ./universal.apk         
 ```
 
-Next, we can decompile with apktool like we did for the silver medal:
+Next, we can decompile with apktool like we did for the [silver medal](#SILVER-MEDAL):
 ```console
 ┌──(root㉿kali)-[/home/kali/mobile_analysis]
 └─# apktool d universal.apk  
