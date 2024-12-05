@@ -6,7 +6,7 @@
 
 ## HINTS: ##
 <details>
-  <summary>Hints provided for Objective 2</summary>
+  <summary>Hints provided for Objective 4</summary>
   
 >-	The official [cURL man page](https://curl.se/docs/manpage.html) has tons of useful information on how to use cURL.
 >-	Take a look at cURL’s “—path-as-is” option; it controls a default behaviour that you may not expect!
