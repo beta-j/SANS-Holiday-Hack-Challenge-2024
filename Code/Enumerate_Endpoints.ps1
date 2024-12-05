@@ -1,3 +1,9 @@
+# Microsoft Co-Pilot Prompts Used:
+# I have a csv file called csvfile.csv and it has two columns that look something like what I am pasting here. I need to create a powershell script that goes through the csv row by row and returns the value of the first column to a variable called $token.
+#
+#
+
+
 # Import the CSV file
 $csvData = Import-Csv -Path "./csvfile.csv"
 
