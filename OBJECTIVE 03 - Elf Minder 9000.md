@@ -17,7 +17,7 @@
 #  
 
 ## PROCEDURE : ##
-### GOLD MEDAL###
+### GOLD MEDAL ###
 
 You can just complete the levels normally to get a **Silver Medal**, but quite honestly, it’s a bit of headache to figure them all out and it’s more worth your while to go straight for the gold and hack your way through the levels.
 
@@ -34,5 +34,10 @@ We can also enter **editor mode** by adding `&edit=true` to the end of the URL. 
 
 Nevertheless, it’s not as easy as it looks now.  We can’t just remove all the obstacles and crates and draw a straight path to the finish.  The game has a number of checks and will throw a Captain Planet themed (lol) error if our elf passes through a location which is supposed to be occupied by an obstacle – so all the boulders and crates must remain where they stand.
 
-Using console, we can add spring and tunnel elements to the game where they would otherwise not have been possible in editor mode.  For example, we can fit in a tunnel exit in the tiny gap between the finish flag and the boulder in A Real Pickle with a console command such as game.entities[23]=[10,9,6]  (be sure to check the length of game.enitities first so you use the correct array index).
+Using console, we can add spring and tunnel elements to the game where they would otherwise not have been possible in editor mode.  For example, we can fit in a tunnel exit in the tiny gap between the finish flag and the boulder in *A Real Pickle* with a console command such as `game.entities[23]=[10,9,6]`  (be sure to check the length of `game.enitities` first so you use the correct array index).
+
 This way we can plot a course for this level that does not need any clicks and uses multiple springs (I also added some hot sand just to make the elf go faster).  Mine looks like this:
+![image](https://github.com/user-attachments/assets/023c6289-7261-4fa8-8abc-dc065a579a5a)
+
+And that completes the objective with a gold medal.
+
