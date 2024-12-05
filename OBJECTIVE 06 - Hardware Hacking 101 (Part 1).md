@@ -51,4 +51,43 @@ When we press the **S** button we get a successful serial connection 😊
 
 ![image](https://github.com/user-attachments/assets/ef3f7b47-41f2-4908-b76f-20cd6395c051)
 
+### GOLD MEDAL ###
+For the Gold Medal Jewel Loggins tells us that there is a way of completing the challenge bypassing the hardware altogether.
+
+To start tackling this part of the challenge we should have a close look at the source code.  Luckily there are plenty of inline comments to help us understand the code.  There is one part that sticks out thanks to the chunk of comments included with it in *lines 872 to 901*.
+
+![image](https://github.com/user-attachments/assets/80b9a016-1a70-4cb2-a946-ea5c77e7dfac)
+
+This snippet of code gives us a lot of useful information:
+  1.	There is an older version of the API (`v1`) that may be vulnerable to hacking.
+  2.	JSON data is submitted to server with `/api/v2/complete` appended to the URI address
+  3.	The JSON data contains the `requestID`, a value for `serial` and a value for `voltage`
+
+To obtain the URI address and `requestID` we can have a look at the Elements tab of the Developer Tools window.  `requestID` is one of the paramters passed in the URI of the iframe. 
+
+![image](https://github.com/user-attachments/assets/3622c91c-2dd3-44a3-b9fc-f6ad98eebead)
+
+From completing the Silver Medal, we also know that the value of voltage should be `3`.
+
+This leaves us with the question of what should be passed as the value of `serial`. If we try running the app through BurpSuite we can see that serial is an array of 6 values – which rings a bell since we had to provide 6 parameters to the PDA to establish the serial connection for the Silver Medal solution.  Searching through the code again, we find an interesting section from *line 208 to 224*, which defines the arrays containing all the options on the PDA:
+
+![image](https://github.com/user-attachments/assets/5840303c-406e-4b08-8b56-538306cf6a07)
+
+This section also defines a variable called `options` which shows us the order in which the options are stored in the array.  From this we can conclude that serial should be an array containing the correct index values for `port`, `baud`, `parity`, `bits`, `stopbits` and `flow ctrl` in that precise order.
+
+The correct index values we need to pass are as follows (remember that array indexes always start from 0!):
+-	`port[3] = USB0`
+-	`baud[9] = 115200`
+-	`parityOptions[2] = even`
+-	`dataBits[2] = 7`
+-	`stopBits[0] = 1`
+-	`flowControlOptions[3]=RTS`
+  
+So the correct array is `serial= [3,9,2,7,1,3]`
+
+With all this information at hand, we can make a simple curl POST request with our `requestID`, the value of `serial` and `voltage` to the URI for API v1; [https://hhc24-hardwarehacking.holidayhackchallenge.com/api/v1/complete](https://hhc24-hardwarehacking.holidayhackchallenge.com/api/v1/complete)
+
+I used a simple Python Script for this (repurposing part of what I used for brute-forcing the Frosty Keypad). After running the code, I can see that I was awarded the gold medal for the challenge – hooray!
+
+
 
