@@ -47,5 +47,10 @@ This unlocks the shredder and allows me to collect a file called shreds.zip whic
 ### GOLD MEDAL ###
 There is a UV flashlight hidden behind the stack of gifts just to the left of the shredder.  By using this on the keypad we can see that the numbers 2,6,7 and 8 where used.  Since we know that this is a five-digit pin, we must assume that one of the digits is used twice.
 
-[Microsoft CoPolit tells me that there are 960 possible unique combinations](a "PROMPT: how many possible unique 5-digit combinations can you create with 4 digits where each digit is used at least once in each combination") so we need to find a way of automating this.  Since I got some practice using cURL recently, I decided to use Python to generate the possible 5-digit combinations and POST them to the game’s URL using cURL.  I used Microsoft Co-Pilot to help me generate the Python Code I used for this.  The code generates the possible combinations and submits each one in the format {answer:pin} as a JSON HTTP POST request and listens for a successful response code of 200. I also included a 2 second delay between each combination attempt, since the server would only accept one request per second.
-After running the script for a few minutes, I got a successful response with the combination 22786 
+Microsoft CoPolit tells me that there are 960 possible unique combinations_("PROMPT: how many possible unique 5-digit combinations can you create with 4 digits where each digit is used at least once in each combination")_ so we need to find a way of automating this.  Since I got some practice using cURL recently, I decided to use Python to generate the possible 5-digit combinations and `POST` them to the game’s URL using cURL.  I used Microsoft Co-Pilot to help me generate the Python Code I used for this.  The code generates the possible combinations and submits each one in the format `{answer:pin}` as a JSON HTTP POST request and listens for a successful response code of `200`. I also included a 2 second delay between each combination attempt, since the server would only accept one request per second.
+
+After running the script for a few minutes, I got a successful response with the combination **22786**.
+
+![image](https://github.com/user-attachments/assets/7e2784b7-5913-49fa-b349-07f77a8e78b9)
+
+
