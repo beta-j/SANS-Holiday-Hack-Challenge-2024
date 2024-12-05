@@ -106,7 +106,9 @@ From the results of this search it looks like it’s worth having closer look at
     .line 56
     const-string v2, "IWna1u1qu/4LUNVrbpd8riZ+w9oZNN1sPRS2ujQpMqAAt114Yw=="
 ```
-Further down, towards the end of the file we can identify another private method, this time called encryptData that is most likely responsible for encrypting the data in the database.  From this we can tell that the data is being encrypted using a AES-GCM cipher and then encoded with base64.  AES-GCM encryption requires a Key and an initial value, which need to look for in our decompiled app.
+Further down, towards the end of the file we can identify another private method, this time called `encryptData` that is most likely responsible for encrypting the data in the database.  From this we can tell that the data is being encrypted using a **AES-GCM** cipher and then encoded with base64.  AES-GCM encryption requires a *Key* and an *initial value*, which need to look for in our decompiled app.
+
+```javascript
 .method private final encryptData(Ljava/lang/String;)Ljava/lang/String;
     .locals 5
     .line 173
@@ -148,18 +150,25 @@ Further down, towards the end of the file we can identify another private method
 .
 .
 .
+```
 
-If we have a look inside R$string.smali, it gives us the index for iv and ek:
+
+If we have a look inside `R$string.smali`, it gives us the index for `iv` and `ek`:
+```javascript
 # static fields
 .field public static app_name:I = 0x7f090001
 .field public static ek:I = 0x7f090033
 .field public static iv:I = 0x7f090037
+```
 
-We can now grep for these values and find /universal/res/values/strings.xml (the hint makes sense now).  From this we get the base64 encoded values for iv and ek:
+We can now `grep` for these values and find `/universal/res/values/strings.xml` (the hint makes sense now).  From this we get the base64 encoded values for `iv` and `ek`:
+```javascript
     <string name="ek">rmDJ1wJ7ZtKy3lkLs6X9bZ2Jvpt6jL6YWiDsXtgjkXw=</string>
     <string name="iv">Q2hlY2tNYXRlcml4</string>
+```
 
-At this point I tried using Cyberchef to decode the encrypted values found in DatabaseHelper.smali, but it became apparent that I needed some kind of Authentication tag….so I asked ChatGPT about this and it explained that AES-GCM normally appends a 16-byte tag to the ciphertext and therefore I would need to split the last 16 bytes from the ciphertext for each entry and use that as my authentication tag.  ChatGPT also conveniently provided me with a python script I could use to decode the entries.
+At this point I tried using Cyberchef to decode the encrypted values found in `DatabaseHelper.smali`, but it became apparent that I needed some kind of *Authentication tag*….so I asked [ChatGPT](https://chatgpt.com/) about this and it explained that AES-GCM normally appends a *16-byte tag* to the ciphertext and therefore I would need to split the last 16 bytes from the ciphertext for each entry and use that as my *authentication tag*.  ChatGPT also conveniently provided me with a python script I could use to decode the entries.
+
 Rather than entering all the entries one by one, I scrolled through DatabaseHelper.smali looking for something that looks a bit different and sure enough, at the end of the file I noticed a considerably larger chunk of encoded text:
     .line 39
     const-string v0, "IVrt+9Zct4oUePZeQqFwyhBix8cSCIxtsa+lJZkMNpNFBgoHeJlwp73l2oyEh1Y6AfqnfH7gcU9Yfov6u70cUA2/OwcxVt7Ubdn0UD2kImNsclEQ9M8PpnevBX3mXlW2QnH8+Q+SC7JaMUc9CIvxB2HYQG2JujQf6skpVaPAKGxfLqDj+2UyTAVLoeUlQjc18swZVtTQO7Zwe6sTCYlrw7GpFXCAuI6Ex29gfeVIeB7pK7M4kZGy3OIaFxfTdevCoTMwkoPvJuRupA6ybp36vmLLMXaAWsrDHRUbKfE6UKvGoC9d5vqmKeIO9elASuagxjBJ"
