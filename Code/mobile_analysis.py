@@ -1,10 +1,10 @@
 """Database Decrypt - AES-GCM
 #created by OpenAI ChatGPT
 
-"""OpenAI ChatGPT Prompts Used:
--	I have a number of encoded strings such as this one: ""L2nc3+01t5wzVN92dNMR5wdr0Z9XAJhDurK0PoMIwB3/YInPpneEf/Q3blsrDg==" and I need to decode them.  To decode them, I first need to base64 decode the string and then decrypt with AES GCM using the following IV and Encryption Key (both are base64 encoded):  IV: Q2hlY2tNYXRlcml4  and Encryption Key: rmDJ1wJ7ZtKy3lkLs6X9bZ2Jvpt6jL6YWiDsXtgjkXw=  Ideally I should either use a cyberchef recipe for this or a python script
--	I get the following error in python: ValueError: Authentication tag must be provided when decrypting. 
-"""
+#OpenAI ChatGPT Prompts Used:
+#I have a number of encoded strings such as this one: ""L2nc3+01t5wzVN92dNMR5wdr0Z9XAJhDurK0PoMIwB3/YInPpneEf/Q3blsrDg==" and I need to decode them.  To decode them, I first need to base64 decode the string and then decrypt with AES GCM using the following IV and Encryption Key (both are base64 encoded):  IV: Q2hlY2tNYXRlcml4  and Encryption Key: rmDJ1wJ7ZtKy3lkLs6X9bZ2Jvpt6jL6YWiDsXtgjkXw=  Ideally I should either use a cyberchef recipe for this or a python script
+#I get the following error in python: ValueError: Authentication tag must be provided when decrypting. 
+
 
 
 import base64
