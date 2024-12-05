@@ -6,7 +6,7 @@
 
 ## HINTS: ##
 <details>
-  <summary>Hints provided for Objective 2</summary>
+  <summary>Hints provided for Objective 3</summary>
   
 >-	Some levels will require you to click and rotate paths in order for your elf to collect all the crates.
 >-	Be sure you read the "Help" section thoroughly! In doing so, you will learn how to use the tools necessary to safely guide your elf and collect all the crates.
