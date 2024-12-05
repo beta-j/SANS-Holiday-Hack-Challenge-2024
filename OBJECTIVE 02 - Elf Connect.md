@@ -1,4 +1,4 @@
-# OBJECTIVE 2 - Snowball Hero #
+# OBJECTIVE 2 - Elf Connect #
 
 ## OBJECTIVE : ##
 >Help Angel Candysalt connect the dots in a game of connections.
