@@ -60,3 +60,44 @@ You have successfully set a custom HTTP header!
 alabaster@curlingfun:~$ curl https://curlingfun:9090/../../etc/hacks -k --path-as-is
 You have successfully utilized --path-as-is to send a raw path!
 ```
+
+#
+
+### GOLD MEDAL ###
+Bow Ninecandles tells us that there is a way to pass through this challenge using just three commands… my first thought was to combine all the different curl switches in a single-line command like; `curl https://curlingfun:9090/ -k -d "skip=alabaster" --cookie "end=3" -H "Stone:Granite" -v`  but this doesn’t work, so it seems that we need to be a bit craftier to get the gold.
+
+Typing `ls` into the terminal shows us that there is a text file called `HARD-MODE.txt` – well that looks interesting…
+
+```console
+alabaster@curlingfun:~$ ls
+HARD-MODE.txt  HELP
+alabaster@curlingfun:~$ cat HARD-MODE.txt 
+Prefer to skip ahead without guidance?  Use curl to craft a request meeting these requirements:
+
+- HTTP POST request to https://curlingfun:9090/
+- Parameter "skip" set to "bow"
+- Cookie "end" set to "10"
+- Header "Hack" set to "12ft"
+```
+
+This is easy by now; we’ve learned all we need for this by completing the silver medal:
+
+```console
+alabaster@curlingfun:~$ curl https://curlingfun:9090/ -k -d "skip=bow" --cookie "end=10" -H "Hack:12ft"
+Excellent!  Now, use curl to access this URL: https://curlingfun:9090/../../etc/button
+```
+
+We’ve learned how to tackle this next bit too by using the `–path-as-is` switch with cURL:
+```console
+alabaster@curlingfun:~$ curl https://curlingfun:9090/../../etc/button -k –path-as-is
+Great!  Finally, use curl to access the page that this URL redirects to: https://curlingfun:9090/GoodSportsmanship
+```
+
+Following URL redirects is something new in this challenge, but it’s quite easy to figure out how to do it with a quick look at the[ man page](https://curl.se/docs/manpage.html) or a Google search:
+
+```console
+alabaster@curlingfun:~$ curl https://curlingfun:9090/GoodSportsmanship -k -L
+Excellent work, you have solved hard mode!  You may close this terminal once HHC grants your achievement.
+```
+ 
+
