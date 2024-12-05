@@ -42,7 +42,8 @@ Set|	Corresponding Letter|	Keypad Digit
 14:8:3|	A|	2
 
 ![image](https://github.com/user-attachments/assets/9cba86e1-4d97-4566-88e7-073b6c6a9aee)![image](https://github.com/user-attachments/assets/0f1c72f2-2945-498f-a583-908a37db6cec)
-This unlocks the shredder and allows me to collect a file called shreds.zip which appears to contain scanned copies of thin slivers of shredded paper as individual image files. 
+
+This unlocks the shredder and allows me to collect a file called `shreds.zip` which appears to contain scanned copies of thin slivers of shredded paper as individual image files. 
 
 ### GOLD MEDAL ###
 There is a UV flashlight hidden behind the stack of gifts just to the left of the shredder.  By using this on the keypad we can see that the numbers 2,6,7 and 8 where used.  Since we know that this is a five-digit pin, we must assume that one of the digits is used twice.
