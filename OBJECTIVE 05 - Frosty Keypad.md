@@ -6,7 +6,7 @@
 
 ## HINTS: ##
 <details>
-  <summary>Hints provided for Objective 4</summary>
+  <summary>Hints provided for Objective 5</summary>
   
 >- Hmmmm. I know I have seen Santa and the other elves use this keypad. I wonder what it contains. I bet whatever is in there is a **National Treasure**!
 >-	Well this is puzzling. I wonder if Santa has a seperate code. Bet that would cast some light on the problem. I know this is a stretch...but...what if you had one of those fancy UV lights to look at the fingerprints on the keypad? That might at least limit the possible digits being used...
