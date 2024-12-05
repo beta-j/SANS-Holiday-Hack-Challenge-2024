@@ -1,0 +1,41 @@
+# OBJECTIVE 2 - Snowball Hero #
+
+## OBJECTIVE : ##
+>Help Angel Candysalt connect the dots in a game of connections.
+#  
+
+## PROCEDURE : ##
+By reading through the instructions we know that this objective consists of a trivia game in which we need to group words that fall within the same sub-category.
+
+### SILVER MEDAL ###
+
+To achieve the silver medal, you can just use your cybersecurity knowledge (and some Googling to fill-in the gaps).  Or you can have a look at the game’s code, which makes it really obvious what the correct groupings are. The sub-categories are defined in a cleartext array called wordSets which has four arrays of 16 elements each (0 to 15).  Each correct set is defined as the corresponding array position of 4 elements inside the array called correctSets. 
+
+`elfThrowDelay = 999999`
+
+`santaThrowDelay = 999999`
+
+`playersHitBoxSize = [0,0,0,0]`
+
+This effectively rendered me invincible and disabled the elves and Santa from throwing any snowballs.  This way I was able to simply wait for someone to join the fight and we could defeat Santa together.
+
+The hints seem to indicate that there should also be a way of defeating Santa on my own  but I didn’t manage to achieve that.  I identified a client-side variable called `singlePlayer` and if I manually set this to `‘true’` before clicking on the Ready button, the game would play a sound saying **“Never Fear! Elf the Dwarf is here!”**  and based on the code snippet below I’m guessing the game should theoretically generate a sprite (`jaredSprite`) to assist me in fighting Santa.  But no matter how many times I tried, the game just froze up completely and became unplayable whenever I changed this variable ☹
+
+```javascript
+      ReadyButton.on('pointerdown', function() {
+        ReadyButton.destroy();
+        scrollintro.destroy()
+        player.update = true
+        player.ready = 1
+        // jared ... I mean Elf the dwarf joins the fight when in single player mode
+        if (singlePlayer === 'true') {
+          setTimeout(() => {
+            if (isaudio) {
+              gameSceneObject.sound.play('elf_the_dwarf_is_here', { volume: 0.5 });
+            }
+            toastManager.showToast("Elf the dwarf has joined your team!", duration=500, delay=5000);
+            jaredSprite = gameSceneObject.physics.add.sprite(starting_pos.x + 150, starting_pos.y, 'jaredSprite');
+            //jaredSprite.setScale(1.2)
+            jaredSprite.setScale(0)
+            jaredSprite.setAlpha(0)
+            gameSceneObject.tweens.add({
