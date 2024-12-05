@@ -76,7 +76,9 @@ In case you’re curious, the answers fall into the following sub-categories:
 For a gold medal we are tasked with beating the high-score of 50,000.  Playing the game normally, we are only awarded 100 points for each correct set of four words, so the maximum score is 1600 – quite far away from the target of 50,000.  So, it’s clear that we need to be a bit sneakier in our approach.
 
 Having a look through the code again, we can see a variable called `score` that is being updated with our score every time we complete a set.  It is initially set to `0`, and by typing `score` in the browser console we can see it getting updated every time we complete a set.  So, we can simply type in `score = 999999` to give ourselves a new score.
+
 ![image](https://github.com/user-attachments/assets/281b77c7-072b-45d8-93fb-803bbb02655b)
+
 
 All that’s left for us to do now, is to complete at least one more set and we have the new high-score 😊
 ![image](https://github.com/user-attachments/assets/dc299621-6ccc-4a4f-9641-83f70d93321a)
