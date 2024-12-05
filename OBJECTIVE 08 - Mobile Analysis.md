@@ -34,5 +34,12 @@ So, we know the names must be listed somewhere and just by using the app we know
 gre└─$ grep -r Carlos   
 smali_classes3/com/northpole/santaswipe/DatabaseHelper.smali:130:    const-string v0, "INSERT INTO NormalList (Item) VALUES (\'Carlos, Madrid, Spain\');"
 ```
-Now that we know to look inside DatabaseHelper.smali, we can go through the names in the file one by one and swipe them off the list on the app until we find one that isn’t included in the app….and it looks like the unlucky girl is Ellie, form Alabama, US.
-If we run another grep for Ellie this time we can see that her entry is being specifically excluded in smali_classes3/com/northpole/santaswipe/MainActivity$WebAppInterface.smali
+Now that we know to look inside DatabaseHelper.smali, we can go through the names in the file one by one and swipe them off the list on the app until we find one that isn’t included in the app….and it looks like the unlucky girl is **Ellie**, from **Alabama, US**.
+
+If we run another `grep` for `Ellie` this time we can see that her entry is being specifically excluded in `smali_classes3/com/northpole/santaswipe/MainActivity$WebAppInterface.smali`
+```console
+┌──(root㉿kali)-[/home/kali/mobile_analysis/SantaSwipe]
+└─# grep -r Ellie 
+smali_classes3/com/northpole/santaswipe/DatabaseHelper.smali:    const-string v0, "INSERT INTO NormalList (Item) VALUES (\'Ellie, Alabama, USA\');"
+smali_classes3/com/northpole/santaswipe/MainActivity$WebAppInterface.smali:    const-string v3, "SELECT Item FROM NormalList WHERE Item NOT LIKE \'%Ellie%\
+```
