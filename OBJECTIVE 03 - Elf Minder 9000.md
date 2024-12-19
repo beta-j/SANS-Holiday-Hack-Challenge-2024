@@ -41,3 +41,6 @@ This way we can plot a course for this level that does not need any clicks and u
 
 And that completes the objective with a gold medal.
 
+#
+[<<< Previous Objective (02)](OBJECTIVE%2002%20-%20Elf%20Connect.md)|......................................................................................................| [Next Objective (04) >>>](OBJECTIVE%2004-%20cURLing.md)|
+:-|--|-:
