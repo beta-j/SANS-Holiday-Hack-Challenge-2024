@@ -55,3 +55,6 @@ After running the script for a few minutes, I got a successful response with the
 ![image](https://github.com/user-attachments/assets/7e2784b7-5913-49fa-b349-07f77a8e78b9)
 
 
+#
+[<<< Previous Objective (04 - cURLing)](OBJECTIVE%2004-%20cURLing.md)|.........................................................| [Next Objective (06 - Hardware Hacking 101 - Part 1) >>>](OBJECTIVE%2006%20-%20Hardware%20Hacking%20101%20(Part%201).md)|
+:-|--|-:
