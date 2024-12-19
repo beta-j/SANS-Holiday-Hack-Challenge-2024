@@ -85,7 +85,7 @@ All that’s left for us to do now, is to complete at least one more set and we 
 
 
 #
-[<<< Previous Objective (01)](OBJECTIVE%2001%20-%20Holiday%20Hack%20orientation.md)|......................................................................................................| [Next Objective (Leve03) >>>](OBJECTIVE%2003%20-%20Elf%20Minder%209000.md)|
+[<<< Previous Objective (01)](OBJECTIVE%2001%20-%20Holiday%20Hack%20orientation.md)|......................................................................................................| [Next Objective (03) >>>](OBJECTIVE%2003%20-%20Elf%20Minder%209000.md)|
 :-|--|-:
 
 
