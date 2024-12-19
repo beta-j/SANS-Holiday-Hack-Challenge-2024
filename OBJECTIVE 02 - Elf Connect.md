@@ -84,11 +84,6 @@ All that’s left for us to do now, is to complete at least one more set and we 
 ![image](https://github.com/user-attachments/assets/dc299621-6ccc-4a4f-9641-83f70d93321a)
 
 
-
-#
-[<<< Previous Objective (03 - Elf Minder 9000)](OBJECTIVE%2003%20-%20Elf%20Minder%209000.md)|.........................................................| [Next Objective (05 - Frosty Keypad) >>>](OBJECTIVE%2005%20-%20Frosty%20Keypad.md)|
-:-|--|-:
-
 #
 [<<< Previous Objective (01 - Holiday Hack Orientation)](OBJECTIVE%2001%20-%20Holiday%20Hack%20orientation.md)|.........................................................| [Next Objective (03 - Elf Minder 9000) >>>](OBJECTIVE%2003%20-%20Elf%20Minder%209000.md)|
 :-|--|-:
