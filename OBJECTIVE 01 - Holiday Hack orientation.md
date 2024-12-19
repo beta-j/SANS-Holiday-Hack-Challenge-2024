@@ -11,5 +11,3 @@ Just follow the instructions and you’re set.  Not much to report here!
 
 #
 .................................................................................................................................| [Next Objective (02) >>>](OBJECTIVE%2002%20-%20Elf%20Connect.md)|
-
-:-|--|-:
