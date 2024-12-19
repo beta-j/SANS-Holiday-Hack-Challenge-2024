@@ -100,4 +100,6 @@ alabaster@curlingfun:~$ curl https://curlingfun:9090/GoodSportsmanship -k -L
 Excellent work, you have solved hard mode!  You may close this terminal once HHC grants your achievement.
 ```
  
-
+#
+[<<< Previous Objective (03 - Elf Minder 9000)](OBJECTIVE%2003%20-%20Elf%20Minder%209000.md)|......................................................................................................| [Next Objective (05 - Frosty Keypad) >>>](OBJECTIVE%2005%20-%20Frosty%20Keypad.md)|
+:-|--|-:
