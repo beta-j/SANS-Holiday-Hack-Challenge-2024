@@ -87,7 +87,7 @@ So, all that we need to do now is prepend the UUID for card 42 with a `1` and pa
 
 ![image](https://github.com/user-attachments/assets/92321330-6a08-4544-9750-ba3d85e07a3c)
 
-We now have our freshly-baked HMAC value for card no. 42 with an access value of `1`.  All that remains is for us to update the datatbase with this new value:
+We now have our freshly-baked HMAC value for card no. 42 with an access value of `1`.  All that remains is for us to update the database with this new value:
 
 ```sql
 sqlite> UPDATE access_cards SET sig='135a32d5026c5628b1753e6c67015c0f04e26051ef7391c2552de2816b1b7096' WHERE id=42;
