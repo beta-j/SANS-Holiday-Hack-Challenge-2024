@@ -1,6 +1,8 @@
 # OBJECTIVE 7 - Hardware Hacking 101 (Part 2) #
 Difficulty: ❄️
 
+[Direct Link](https://hhc24-wetty.holidayhackchallenge.com/?&challenge=termHardwareHacking101B)
+
 ## OBJECTIVE : ##
 >Santa’s gone missing, and the only way to track him is by accessing the Wish List in his chest—modify the access cards database to gain entry!
 
