@@ -1,11 +1,12 @@
 # OBJECTIVE 9 - Drone Path #
+Difficulty: ❄️❄️❄️
 
 ## OBJECTIVE : ##
 >Help the elf defecting from Team Wombley get invaluable, top secret intel to Team Alabaster. Find Chimney Scissorsticks, who is hiding inside the DMZ.
 #
 
 ## PROCEDURE : ##
-### SILVER MEDAL ###
+### 🥈 SILVER MEDAL ###
 When accessing the terminal, we can either access a login screen or a fileshare.  Given that we don’t have any login credentials (yet), let’s have a look at the fileshare.  There is a single file we can download called `fritjolf-Path.kml`.
 
 Kml files typically store a number of coordinates in sequence to create a path between each point.  The most popular program to open such files is [Google Earth](https://earth.google.com/web/).  If we download the file and open it in Google Earth we can see what is presumably a flight path which interestingly describes the outline of a word: `GUMDROP1` over Antartica:
@@ -49,7 +50,7 @@ Submit this as the password to the admin panel to get the Silver Medal:
 ![image](https://github.com/user-attachments/assets/3838cb61-a750-4eb1-98e5-e6b24a9f95d6)
 
 #
-### GOLD MEDAL ###
+### 🥇 GOLD MEDAL ###
 Having obtained access to the drone fleet administration, Chimney Scissorsticksticks tells us to _“dig deeper”_ and hints at the existence of an _“injection flaw”_ that we might be able to exploit.
 
 Chimney’s hint is very helpful and it immediately points us towards looking for an SQL injection point.  While still logged in with the `fritjolf` account we have access to two user-input fields that might possibly be susceptible to SQLi, so it’s just a matter of pasting in the infamous `‘OR 1=1 –` string to see if it does anything interesting.  Luckily we see some interesting results when testing this in the search box of the Workshop page.
