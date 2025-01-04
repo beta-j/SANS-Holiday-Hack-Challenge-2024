@@ -1,4 +1,5 @@
 # OBJECTIVE 4 - cURLing #
+Difficulty: ❄️
 
 ## OBJECTIVE : ##
 >Team up with Bow Ninecandle to send web requests from the command line using Curl, learning how to interact directly with web servers and retrieve information like a pro!
@@ -15,7 +16,7 @@
 #  
 
 ## PROCEDURE : ##
-### SILVER MEDAL ###
+### 🥈 SILVER MEDAL ###
 
 For a Silver Medal all you need to do is follow the instructions that pop up on the terminal screen.  Whenever you’re stuck just type in hint or refer to the cURL man page and it should be straightforward to complete.  You can also just copy the commands shown here:
 
@@ -63,7 +64,7 @@ You have successfully utilized --path-as-is to send a raw path!
 
 #
 
-### GOLD MEDAL ###
+### 🥇 GOLD MEDAL ###
 Bow Ninecandles tells us that there is a way to pass through this challenge using just three commands… my first thought was to combine all the different curl switches in a single-line command like; `curl https://curlingfun:9090/ -k -d "skip=alabaster" --cookie "end=3" -H "Stone:Granite" -v`  but this doesn’t work, so it seems that we need to be a bit craftier to get the gold.
 
 Typing `ls` into the terminal shows us that there is a text file called `HARD-MODE.txt` – well that looks interesting…
