@@ -1,6 +1,8 @@
 # OBJECTIVE 10 - PowerShell #
 Difficulty: ❄️❄️❄️
 
+[Direct Link](https://hhc24-wetty.holidayhackchallenge.com?&challenge=termPowershell)
+
 ## OBJECTIVE : ##
 >Team Wombley is developing snow weapons in preparation for conflict, but they've been locked out by their own defenses. Help Piney with regaining access to the weapon operations terminal.
 #
