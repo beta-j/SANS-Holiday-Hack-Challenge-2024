@@ -1,4 +1,5 @@
 # OBJECTIVE 11 - Snowball Showdown #
+Difficulty: ❄️❄️
 
 ## OBJECTIVE : ##
 >Wombley has recruited many elves to his side for the great snowball fight we are about to wage. Please help us defeat him by hitting him with more snowballs than he does to us.
@@ -6,7 +7,7 @@
 #  
 
 ## PROCEDURE : ##
-### GOLD MEDAL ###
+### 🥇 GOLD MEDAL ###
 At first glance this game reminds me a lot of last year’s **Snowball Hero** challenge, so I started off by reading through [the notes in my writeup for last year’s Holiday Hack Challenge](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2023).  In a nutshell, last year we were able to edit the values of client-side variables to win the game, so that might be one approach to try this year too.
 
 First, we need to figure out a way to play the game without having to team up with another player, which will make it a lot easier to test out some stuff in the browser console and see what it does.  The game conveniently launches in a new browser window and the URI ends with `&singlePlayer=false`.  It’s just a matter of changing this to `&singlePlayer=true` and reloading the page to launch the game in single-player mode. 
