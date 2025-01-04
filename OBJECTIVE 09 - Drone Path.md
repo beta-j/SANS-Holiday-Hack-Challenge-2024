@@ -1,6 +1,8 @@
 # OBJECTIVE 9 - Drone Path #
 Difficulty: ❄️❄️❄️
 
+[Direct Link](https://hhc24-dronepath.holidayhackchallenge.com)
+
 ## OBJECTIVE : ##
 >Help the elf defecting from Team Wombley get invaluable, top secret intel to Team Alabaster. Find Chimney Scissorsticks, who is hiding inside the DMZ.
 #
