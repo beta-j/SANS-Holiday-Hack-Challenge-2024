@@ -1,7 +1,7 @@
 # SANS-Holiday-Hack-Challenge-2024
 Write Up tackling the Objectives and Challenges of the [SANS Holiday Hack Challenge 2024](https://www.sans.org/mlp/holiday-hack-challenge-2024/) which I submitted on the **2nd January 2025** (Works in Progress)
 
-### [PDF Version available to View/Download Here](Assets/ne_James Baldacchino SANS HHC 2024 WriteUp.pdf) ###
+### [PDF Version available to View/Download Here](Assets/ne_James%20Baldacchino%20SANS%20HHC%202024%20WriteUp.pdf) ###
 
 #  
 
