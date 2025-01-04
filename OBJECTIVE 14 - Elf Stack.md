@@ -190,3 +190,70 @@ We can search for [Windows Event ID 4888 – Certificate Services denied a certi
 
 I found [this article by Beyond Trust](https://www.beyondtrust.com/blog/entry/esc1-attacks) to be very helpful in answering this question.  The article suggests that to detect an ADCS ESC1 attack we should focus on Event IDs `4886` and `4887`.  If we apply the filter `event.EventID : 4886` in ELK, it returns a single document showing that a certificate was granted to <ins>**nutcrakr@northpole.local**</ins>.
 
+**Question 17:**_ One of our file shares was accessed by the attacker using the elevated user account (from the ADCS attack). Submit the folder name of the share they accessed._
+
+We can use the newly-discovered username to search for events along with a string such as `\\` (remembering to escape each `\` character) to find references to network share locations:
+```kql
+event.SubjectUserName : “nutcrakr” and \\\\*
+```
+By looking at the contents of the `event.ShareName` field we can see that the attacker first accessed the share called <ins>**\\*\WishLists**</ins>.
+
+**Question 18:** _The naughty attacker continued to use their privileged account to execute a PowerShell script to gain domain administrative privileges. What is the password for the account the attacker used in their attack payload?_
+
+For some reason I wasn’t able to get to the answer of this question through Kibana, it looks like some logs were not parsed properly – which is maybe what one of the hints is referring to.  However, I was able to search for log entries that included `nutcrakr` and `New-Object` to detect possible powershell scripts that were executed by `nutcrakr`:
+```bash
+# cat log_chunk_2.log | grep nutcrakr | grep New-Object -i
+```
+This returns a log entry that includes ``Admins,CN=Users,DC=northpole,DC=local\"\n$username = \"nutcrakr\"\n$pswd = 'fR0s3nF1@k3_s'``
+
+**Question 19:** _The attacker then used remote desktop to remotely access one of our domain computers. What is the full ISO8601 compliant UTC EventTime when they established this connection?_
+
+To answer this, we can filter for [event ID 4624 (successful logon attempts)](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4624) with a [logon type of 10 (remote interactive)](https://learn.microsoft.com/en-us/windows-server/identity/securing-privileged-access/reference-tools-logon-types):
+```kql
+ event.EventID : 4624 and event.LogonType : 10
+```
+This returns a single event with the timestamp: <inis>**2024-09-16T15:35:57.000Z**</ins>
+
+This log entry indicates that the user `nutcrakr` successfully established a Remote Desktop (RDP) connection to the computer `dc01.northpole.local` from the IP address `10.12.25.24`. The logon type `10` confirms that it was a _RemoteInteractive_ logon, typically associated with RDP sessions.
+
+**Question 20:** _The attacker is trying to create their own naughty and nice list! What is the full file path they created using their remote desktop connection?_
+
+We know that the username is `nutcrak`r and that they accessed the `WishLists` fileshare so we can try filtering for all events that include `nutcrakr` and `WishLists`: 
+```kql
+*nutcrakr* and *WishLists*
+```
+The `event.CommandLine` field for the most recent event shows us `C:\Windows\system32\NOTEPAD.EXE `<ins>**C:\WishLists\santadms_only\its_my_fakelst.txt**</ins>
+
+**Question 21:** _The Wombley faction has user accounts in our environment. How many unique Wombley faction users sent an email message within the domain?_
+
+Apply the following filter to find any email with a **From** address that starts with `wc`:
+```kql
+event_source : “SnowGlowMailPxy” and event.From : wc* and event.To : *northpole.local
+```
+Now look at the Field Statistics tab and there are <ins>**4**</ins> distinct values for `event.From`; `wcube311`, `wcub303`, `wcub808` and `wcub101`
+
+**Question 22:** _The Alabaster faction also has some user accounts in our environment. How many emails were sent by the Alabaster users to the Wombley faction users?_
+
+Similarly to the previous question, we can use the following filter to find emails sent to any address starting with `wc` from any address starting with `as`:
+```kql
+ event_source : “SnowGlowMailPxy” and event.From : as* and event.To : wc*
+```
+ Then look at the Field Statistics tab and there are <ins>**22**</ins> returned mail events.
+
+**Question 23:** _Of all the reindeer, there are only nine. What's the full domain for the one whose nose does glow and shine? To help you narrow your search, search the events in the 'SnowGlowMailPxy' event source._
+
+The reindeer “_whose nose does glow_” is of course **Rudolph**, so we can filter for any mail records that contain the string `Rudolph`:
+```kql
+event_source : “SnowGlowMailPxy” and *Rudolph*
+```
+If we scroll to through the results, one of the emails sticks out because it has a Rudolph-related domain: <ins>**RudolphRunner@rud01ph.glow**</ins>.
+
+**Question 24:** _With a fiery tail seen once in great years, what's the domain for the reindeer who flies without fears? To help you narrow your search, search the events in the 'SnowGlowMailPxy' event source._
+
+The riddle in the question is referring to **Comet** which is the name of one of Santa’s reindeer as well as a cosmic event with a “Fiery tail”.  The problem is that many of the domains we’ve seen in the `SnowGlowMailPxy` logs are written in _leetspeak_, so we need to search for a number of different possible ways of writing `comet`:
+```kql
+event_source : "SnowGlowMailPxy" and event.From : *comet* or event.From : *c0met* or event.From : *c0m3t*
+```
+With this filter we find that our answer is <ins>**c0m3t.halleys**</ins>.
+
+
