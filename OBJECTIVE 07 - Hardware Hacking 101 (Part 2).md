@@ -1,4 +1,5 @@
 # OBJECTIVE 7 - Hardware Hacking 101 (Part 2) #
+Difficulty: ❄️
 
 ## OBJECTIVE : ##
 >Santa’s gone missing, and the only way to track him is by accessing the Wish List in his chest—modify the access cards database to gain entry!
@@ -15,7 +16,7 @@
 #  
 
 ## PROCEDURE : ##
-### SILVER MEDAL ###
+### 🥈 SILVER MEDAL ###
 
 One of the hints comes very close to giving this objective away with it’s reference to ‘*step[ping] back in history*’.
 
@@ -28,7 +29,7 @@ All we need to do is modify the `–id` switch to `42` instead of `143`:
 
 ![image](https://github.com/user-attachments/assets/ea4f895b-e02a-4779-aa06-a33f5a75f653)
 
-### GOLD MEDAL ###
+### 🥇 GOLD MEDAL ###
 To obtain the gold medal, Jewel Loggins tells us that we need to find a way of changing the access for card No. 42 by directly manipulating the database rather than using the SLH tool.  He also mentions that we will need to generate our own HMAC to do this successfully.
 
 In the terminal prompt we can see that there is a single file called `access_cards` and that it is a SQLite 3.x database:
