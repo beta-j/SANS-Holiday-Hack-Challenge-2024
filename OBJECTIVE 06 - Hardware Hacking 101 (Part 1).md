@@ -1,4 +1,5 @@
 # OBJECTIVE 6 - Hardware Hacking 101 (Part 1) #
+Difficulty: ❄️
 
 ## OBJECTIVE : ##
 >Ready your tools and sharpen your wits—only the cleverest can untangle the wires and unlock Santa’s hidden secrets!#  
@@ -14,7 +15,7 @@
 #  
 
 ## PROCEDURE : ##
-### SILVER MEDAL ###
+### 🥈 SILVER MEDAL ###
 
 We are given a “Santa’s little Helper (SLH) Access Card Maintenance Tool” UART-Bridge device that needs to be connected correctly to the terminal in order to access it.  We have a manual showing us the pinouts of the SLH but nothing more.
 ![image](https://github.com/user-attachments/assets/f5217501-95cb-470b-abf8-ff883a6549cb)
@@ -51,7 +52,7 @@ When we press the **S** button we get a successful serial connection 😊
 
 ![image](https://github.com/user-attachments/assets/ef3f7b47-41f2-4908-b76f-20cd6395c051)
 
-### GOLD MEDAL ###
+### 🥇 GOLD MEDAL ###
 For the Gold Medal Jewel Loggins tells us that there is a way of completing the challenge bypassing the hardware altogether.
 
 To start tackling this part of the challenge we should have a close look at the source code.  Luckily there are plenty of inline comments to help us understand the code.  There is one part that sticks out thanks to the chunk of comments included with it in *lines 872 to 901*.
