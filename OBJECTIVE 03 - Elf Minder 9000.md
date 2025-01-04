@@ -1,5 +1,8 @@
 # OBJECTIVE 3 - Elf Miner 9000 #
 Difficulty: ❄️
+
+[Direct Link](https://hhc24-elfminder.holidayhackchallenge.com)
+
 ## OBJECTIVE : ##
 >Assist Poinsettia McMittens with playing a game of Elf Minder 9000.
 #  
