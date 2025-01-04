@@ -1,6 +1,8 @@
 # OBJECTIVE 4 - cURLing #
 Difficulty: ❄️
 
+[Direct Link](https://hhc24-wetty.holidayhackchallenge.com?&challenge=termCurling)
+
 ## OBJECTIVE : ##
 >Team up with Bow Ninecandle to send web requests from the command line using Curl, learning how to interact directly with web servers and retrieve information like a pro!
 #  
