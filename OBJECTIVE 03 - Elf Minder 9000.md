@@ -1,5 +1,5 @@
 # OBJECTIVE 3 - Elf Miner 9000 #
-
+Difficulty: ❄️
 ## OBJECTIVE : ##
 >Assist Poinsettia McMittens with playing a game of Elf Minder 9000.
 #  
@@ -17,9 +17,9 @@
 #  
 
 ## PROCEDURE : ##
-### GOLD MEDAL ###
+### 🥇 GOLD MEDAL ###
 
-You can just complete the levels normally to get a **Silver Medal**, but quite honestly, it’s a bit of headache to figure them all out and it’s more worth your while to go straight for the gold and hack your way through the levels.
+You can just complete the levels normally to get a **🥈 Silver Medal**, but quite honestly, it’s a bit of headache to figure them all out and it’s more worth your while to go straight for the gold and hack your way through the levels.
 
 Looking at the console we find two javascript files; `guide.js` and `game2.js`.  There are some interesting points that stand out here:
 -	`guide.js` declares a variable called `whyCantIholdAllTheseSprings`.  The variable contains ASCII art of a man holding three springs and appears to be sent to the console output when the number of springs is greater than 2 (*lines 367-369*)
