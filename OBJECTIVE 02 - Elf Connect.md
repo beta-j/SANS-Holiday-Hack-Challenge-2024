@@ -1,5 +1,5 @@
 # OBJECTIVE 2 - Elf Connect #
-
+Difficulty: ❄️
 ## OBJECTIVE : ##
 >Help Angel Candysalt connect the dots in a game of connections.
 #  
@@ -7,7 +7,7 @@
 ## PROCEDURE : ##
 By reading through the instructions we know that this objective consists of a trivia game in which we need to group words that fall within the same sub-category.
 
-### SILVER MEDAL ###
+###🥈 SILVER MEDAL###
 
 To achieve the silver medal, you can just use your cybersecurity knowledge (and some Googling to fill-in the gaps).  Or you can have a look at the game’s code, which makes it really obvious what the correct groupings are. The sub-categories are defined in a cleartext array called `wordSets` which has four arrays of 16 elements each (0 to 15).  Each correct set is defined as the corresponding array position of 4 elements inside the array called `correctSets`. 
 
@@ -71,7 +71,7 @@ In case you’re curious, the answers fall into the following sub-categories:
 |__Network Technologies:__|	Ethernet|	PPP|	IEEE 802.11|	ARP
 |__Application Layer Protocols:__|	HTTP|	FTP|	SMTP|	DNS
 
-### GOLD MEDAL ###
+###🥇 GOLD MEDAL ###
 
 For a gold medal we are tasked with beating the high-score of 50,000.  Playing the game normally, we are only awarded 100 points for each correct set of four words, so the maximum score is 1600 – quite far away from the target of 50,000.  So, it’s clear that we need to be a bit sneakier in our approach.
 
