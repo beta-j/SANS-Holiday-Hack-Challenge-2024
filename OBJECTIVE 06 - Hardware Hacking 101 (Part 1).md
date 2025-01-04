@@ -1,6 +1,8 @@
 # OBJECTIVE 6 - Hardware Hacking 101 (Part 1) #
 Difficulty: ❄️
 
+[Direct Link](https://hhc24-hardwarehacking.holidayhackchallenge.com)
+
 ## OBJECTIVE : ##
 >Ready your tools and sharpen your wits—only the cleverest can untangle the wires and unlock Santa’s hidden secrets!#  
 
