@@ -1,4 +1,4 @@
-# OBJECTIVE 3 - Elf Miner 9000 #
+# OBJECTIVE 3 - Elf Minder 9000 #
 Difficulty: ❄️
 
 [Direct Link](https://hhc24-elfminder.holidayhackchallenge.com)
