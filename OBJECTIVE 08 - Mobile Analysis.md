@@ -1,4 +1,5 @@
 # OBJECTIVE 8 - Mobile Analysis #
+Difficulty: ❄️❄️
 
 ## OBJECTIVE : ##
 >Help find who has been left out of the naughty AND nice list this Christmas.  Please speak with Eve Snowshoes for more information.
@@ -19,7 +20,7 @@
 #  
 
 ## PROCEDURE : ##
-### SILVER MEDAL ###
+### 🥈 SILVER MEDAL ###
 For this objective we are given an .apk file with a mobile application.  Just to see what it does, we can install it on an android phone (or an emulator).  Next let’s try and figure out who got left off the Naughty/Nice list.  Let’s start by decompiling the apk file using apktooL:
 ```console
 ┌──(kali㉿kali)-[/tmp/mobapp]
@@ -44,7 +45,7 @@ smali_classes3/com/northpole/santaswipe/DatabaseHelper.smali:    const-string v0
 smali_classes3/com/northpole/santaswipe/MainActivity$WebAppInterface.smali:    const-string v3, "SELECT Item FROM NormalList WHERE Item NOT LIKE \'%Ellie%\
 ```
 
-### GOLD MEDAL ###
+### 🥇 GOLD MEDAL ###
 
 For the gold medal part of this objective, we are given a revised mobile app – this time in `.aab` format.  Since we already have a general idea of how the app works from obtaining the silver medal, we should try to repeat our steps, but first we should take the advice of one of the hints we’re given and convert the `.aab` file into `.apk`.
 
