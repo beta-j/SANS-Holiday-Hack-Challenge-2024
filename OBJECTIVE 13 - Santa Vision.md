@@ -1,3 +1,4 @@
+
 # OBJECTIVE 13 - Santa Vision #
 Difficulty: ❄️❄️❄️❄️
 
@@ -55,7 +56,7 @@ All that remains is for us to guess a password that goes with the username.  At 
 #### SANTA VISION C: ####
 For this part of the objective, we connect to the `frostbitfeed` broadcast.  This doesn’t show us any images, but outputs a number of messages seemingly at random.  It’s important to pay attention here as it’s very easy to miss, but one of the messages reads **“Additional messages available in santafeed”**
 
-```mqtt
+```console
 Error msg: Unauthorized access attempt. /api/v1/frostbitadmin/bot/<botuuid>/deactivate, authHeader: X-API-Key, status: Invalid Key, alert: Warning, recipient: Wombley
 Let's Encrypt cert for api.frostbit.app verified. at path /etc/nginx/certs/api.frostbit.app.key
 Frostbit is a leading cause of network downtime
@@ -67,7 +68,9 @@ Frostbite can occur in as little as 30 minutes in extreme cold - faster in flat 
 Additional messages available in santafeed
 ```
 
-We can now have a look at the santafeed broadcast instead.  This time we are again presented with a number of repeating messages including one which reads “Sixteen elves launched operation: Idemcerybu” which gives us our answer to the Santa Vision C objective.
+We can now have a look at the `santafeed` broadcast instead.  This time we are again presented with a number of repeating messages including one which reads **“Sixteen elves launched operation: Idemcerybu”** which gives us our answer to the Santa Vision C objective.
+
+```console
 Santa is on his way to the North Pole
 Santa is checking his list
 superAdminMode=true
@@ -77,6 +80,95 @@ WombleyC role: admin
 AlabasterS role: admin
 Santa is checking his list
 Sixteen elves launched operation: Idemcerybu
+```
+
+#### Santa Vision D: ####
+The messages in `santafeed` reveal that both `WombleyC` and `AlabasterS` have `admin` roles and that Santa holds a `superAdmin` role.  We also get a message saying `singleAdminMode=true`.  Based on the objective’s instructions it looks like we need to change this to `false` to only allow a single admin on the system.
+
+We can achieve this quite simply by connecting to the `northpolefeeds` broadcast again and then publishing the message `singleAdminMode=true` to the feed `santafeed`. 
+![image](https://github.com/user-attachments/assets/32efad5e-d6ac-48a1-893a-45bbc718f911)
+
+After a couple of seconds, the images on the monitor start to change and now show Santa riding a pogo stick, which is the answer we are looking for to complete this objective.
+![image](https://github.com/user-attachments/assets/849a4da6-c143-457b-8268-953063951fb6)
+
+
 
 ### 🥇 GOLD MEDAL ###
+#### Santa Vision A: ####
+I’ll admit it took me a loooong time to figure out where to get started with obtaining the gold medal for this objective, until I spotted the answer literally staring me in the face at the bottom of the SantaVision login screen!
+
+![image](https://github.com/user-attachments/assets/59169712-0af4-4cdc-897d-e59affa74feb)
+ 
+It looks like there is another broadcast feed we can investigate, by logging in as `elfanon` and using the `elfmonitor` role to power on the monitors again and subscribing to the `sitestatus` feed.
+We immediately see a very interesting message with a path to a **_Super Top Secret file_**.  We simply append this path to the url in the browser to download `applicationDefault.bin`
+
+```console
+File downloaded: /static/sv-application-2024-SuperTopSecret-9265193/applicationDefault.bin
+Broker Authentication as superadmin succeeded
+Broker Authentication as admin succeeded
+Broker Authentication failed: WomblyC
+Broker Authentication succeeded: WomblyC
+Broker Authentication succeeded: AlabasterS
+Broker Authentication failed: AlabasterS
+```
+
+Using the `file` command in Linux we can see that the .bin file we just downloaded uses the `jffs2` filesystem and the hint for this objective kindly points us towards a suitable tool called [Jefferson](https://github.com/onekey-sec/jefferson/) which we can use to analyse such files.
+```bash
+┌──(root㉿kali)-[/media/sf_SANS_Holiday_Hack_2024/Objective 13 - Santa Vision]
+└─# ls
+applicationDefault.bin
+                                                                                                                                                           
+┌──(root㉿kali)-[/media/sf_SANS_Holiday_Hack_2024/Objective 13 - Santa Vision]
+└─# file applicationDefault.bin 
+applicationDefault.bin: Linux jffs2 filesystem data little endian
+                                                                                                                                                           
+┌──(root㉿kali)-[/media/sf_SANS_Holiday_Hack_2024/Objective 13 - Santa Vision]
+└─# apt-get install python3-jefferson
+┌──(root㉿kali)-[/media/sf_SANS_Holiday_Hack_2024/Objective 13 - Santa Vision]
+└─# jefferson applicationDefault.bin -d applicationdir                                                     
+dumping fs to /media/sf_SANS_Holiday_Hack_2024/Objective 13 - Santa Vision/applicationdir (endianness: <)
+Jffs2_raw_inode count: 47
+Jffs2_raw_dirent count: 47
+writing S_ISREG .bashrc
+writing S_ISREG .profile
+```
+
+Once Jefferson outputs the contents of the .bin file to a directory, this objective starts to seem somewhat familiar to what we did with [Mobile Analysis](OBJECTIVE%2008%20-%20Mobile%20Analysis.md) earlier on.  So, my first thought is to `grep` recursively for anything containing `password` or `secret` and sure enough, this points us towards ``/app/src/accounts/views.py`` which contains a reference to a **_top-secret database file_** at ``/sv2024DB-Santa/SantasTopSecretDB-2024-Z.sqlite``
+
+![image](https://github.com/user-attachments/assets/73cf4dee-6365-493b-ad33-8a687c154f70)
+ 
+Once again, we can download this by simply appending the full path to the Santa Vision URL in the browser (or use `wget`).  All that remains is for us to open the file in `sqlite3` and look at the contents of the `users` table to get the username and password for `SantaSiteAdmin`!
+
+```bash
+┌──(root㉿kali)-[/media/sf_SANS_Holiday_Hack_2024/Objective 13 - Santa Vision]
+└─# file SantasTopSecretDB-2024-Z.sqlite 
+SantasTopSecretDB-2024-Z.sqlite: SQLite 3.x database, last written using SQLite version 3046000, file counter 16, database pages 5, cookie 0x2, schema 4, UTF-8, version-valid-for 16
+```
+```sql
+sqlite> SELECT * from users;
+1|santaSiteAdmin|S4n+4sr3411yC00Lp455wd|2024-01-23 06:05:29.466071|1
+```
+
+#### Santa Vision B: ####
+We can use the newly acquired username and password combination to log in to the SantaVision portal.  When doing so, have a good look at the headers in the network response from the server – looks like the username and password we’re looking for have been served to us right away – nice!
+
+![image](https://github.com/user-attachments/assets/227db7f6-784b-428b-b410-057a44585162)
+
+
+#### Santa Vision C: ####
+When subscribing to the broadcast with the new username and password we still get the same feed as we did for the silver medal, so maybe there’s more to the elves’ mission’s code-name than just a group of random letters.  The reference to **_“sixteen elves”_** and the lack of any special characters in the code-name immediately made me think of a **Caeser Cipher** – presumably with a shift key of 16, i.e. each letter is replaced by the corresponding letter of the alphabet 16 spaces down, so A becomes Q, B becomes R, etc…  To decode, we simply reverse the direction:
+
+|Ciphertext:|Q|R|S|T|U|V|W|X|Y|Z|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P
+|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
+|Plaintext: |A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z
+
+So Idemcerybu decodes to **Snowmobile**.
+
+#### Santa Vision D: ####
+For the final part of this objective, we need to send the MQTT message `singleAdminMode=true` just as we did for the silver medal.  However, this time we have no web interface available to post the message.   No worries – we can simply use a tool such as MQTTX for this.  We use the santashelper2024 username and password as our credentials and point it towards ws://<santavision ip>:9001.  
+ 
+Then simply send a message to santafeed saying singleAdminMode=true.
+Now, if we go back to the SantaVision portal and load up the northpolefeeds broadcast, we can see Santa riding some cool hovercrafts and we have our answer for the gold medal 😊
+
+ 
 
