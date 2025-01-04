@@ -1,6 +1,8 @@
 # OBJECTIVE 11 - Snowball Showdown #
 Difficulty: ❄️❄️
 
+[Direct Link](https://hhc24-snowballshowdown.holidayhackchallenge.com/)
+
 ## OBJECTIVE : ##
 >Wombley has recruited many elves to his side for the great snowball fight we are about to wage. Please help us defeat him by hitting him with more snowballs than he does to us.
 
