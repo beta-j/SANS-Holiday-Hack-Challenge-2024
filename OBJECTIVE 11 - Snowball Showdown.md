@@ -25,22 +25,25 @@ In the developer console we can type directly into the source code to modify the
 •	**Line 680**:	`this.onlyMoveHorizontally = false;`
 •	**Line 1292**:	`"blastRadius": 20000,`
 
-By changing these variables, we will be able to fire off snowballs at a much faster rate and each snowball will have a massive blast area.  We will also be able to move our sprite up and down – effectively flying over and around obstacles and any damage done to terrain.  Once we’ve edited all the variables we want to play around with, we can right click on the source file and select **Save As** and save it in the Overrides directory we set Chrome to look at.  It’s important to keep the same filename when saving this.
+By changing these variables, we will be able to fire off snowballs at a much faster rate and each snowball will have a massive blast area.  We will also be able to move our sprite up and down – effectively flying over and around obstacles and any damage done to terrain.  Once we’ve edited all the variables we want to play around with, we can right click on the source file and select **_Save As_** and save it in the Overrides directory we set Chrome to look at.  It’s important to keep the same filename when saving this.
 
-Finally, we right-click on the filename for `Phaser-snowball-game.js` and select **_Override content_** (you’ll notice that the filename on the left pane of developer view now has a purple dot on it indicating that a local override version is being loaded instead).  This instructs Chrome to load the local version of Phaser-snowball-game.js that we saved earlier instead of the version being downloaded from the server.
+Finally, we right-click on the filename for `Phaser-snowball-game.js` and select **_Override content_** (you’ll notice that the filename on the left pane of developer view now has a purple dot 🟣 on it indicating that a local override version is being loaded instead).  This instructs Chrome to load the local version of `Phaser-snowball-game.js` that we saved earlier instead of the version being downloaded from the server.
+
+![image](https://github.com/user-attachments/assets/d1816d97-746b-4476-adf8-0624f88b5e51)
+
 All that’s left is to reload the page and use our new superpowers to win the snowball fight against Wombley to get our Silver Medal.
+
+![image](https://github.com/user-attachments/assets/1fe7cebb-9789-4d43-b9a4-13b75cbedb00)
 
 
 ### 🥇 GOLD MEDAL ###
 
+In the silver medal we’ve already eliminated the possibility of `elfIds.js` and  `Phaser-snowball-game.js` having any client-side accessible variables.
 
-
-
-
-
-
-
-This leaves us with the final `.js` file called `reconnecting-websocket.min.js` which also appears to be a standard library, but on closer inspection it seems to have some added code at the end.  The code adds a function which refers to a `MOASB`  (I’m guessing this stands for *Mother Of All Snowball Bombs*) and assigns it to `window.bgDebug` which makes it globally accessible via the `bgDebug` property on the `window` object.  The first line of the function is     `if (e.type && "moasb_start" === e.type && mainScene && !mainScene.moasb_started) {` which checks if the event `e` has a type property with the value `moasb_start`, if this condition is met the function triggers the MOASB scene.
+This leaves us with the final `.js` file called `reconnecting-websocket.min.js` which also appears to be a standard library, but on closer inspection it seems to have some added code at the end.  The code adds a function which refers to a `MOASB`  (I’m guessing this stands for **_Mother Of All Snowball Bombs_**) and assigns it to `window.bgDebug` which makes it globally accessible via the `bgDebug` property on the `window` object.  The first line of the function is:     
+```javascript
+if (e.type && "moasb_start" === e.type && mainScene && !mainScene.moasb_started) {```
+This checks whether the event `e` has a type property with the value `moasb_start`, if this condition is met the function triggers the MOASB scene.
 
 Now that we’ve identified this crucial bit of code with a client-side exposed property, all we need to do is start a new game, head to the browser’s console and type in `window.bgDebug({type: “moasb_start”})`. Now sit back and enjoy the show as a bomber aircraft flies in carrying the MOASB and launches it with Jared riding it, wielding an axe and using some questionable elf language!
 
