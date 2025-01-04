@@ -159,7 +159,7 @@ We can use the newly acquired username and password combination to log in to the
 When subscribing to the broadcast with the new username and password we still get the same feed as we did for the silver medal, so maybe there’s more to the elves’ mission’s code-name than just a group of random letters.  The reference to **_“sixteen elves”_** and the lack of any special characters in the code-name immediately made me think of a **Caeser Cipher** – presumably with a shift key of 16, i.e. each letter is replaced by the corresponding letter of the alphabet 16 spaces down, so A becomes Q, B becomes R, etc…  To decode, we simply reverse the direction:
 
 |Ciphertext:|Q|R|S|T|U|V|W|X|Y|Z|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P
-|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
+|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 |Plaintext: |A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z
 
 So Idemcerybu decodes to **Snowmobile**.
