@@ -1,4 +1,5 @@
 # OBJECTIVE 12 - Microsoft KC7 #
+Difficulty: ❄️❄️❄️
 
 ## OBJECTIVE : ##
 >[Answer](https://kc7cyber.com/go/hhc24) two sections for silver, all four sections for gold.
