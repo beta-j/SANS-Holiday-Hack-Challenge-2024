@@ -165,10 +165,22 @@ When subscribing to the broadcast with the new username and password we still ge
 So Idemcerybu decodes to **Snowmobile**.
 
 #### Santa Vision D: ####
-For the final part of this objective, we need to send the MQTT message `singleAdminMode=true` just as we did for the silver medal.  However, this time we have no web interface available to post the message.   No worries – we can simply use a tool such as MQTTX for this.  We use the santashelper2024 username and password as our credentials and point it towards ws://<santavision ip>:9001.  
- 
-Then simply send a message to santafeed saying singleAdminMode=true.
-Now, if we go back to the SantaVision portal and load up the northpolefeeds broadcast, we can see Santa riding some cool hovercrafts and we have our answer for the gold medal 😊
+For the final part of this objective, we need to send the MQTT message `singleAdminMode=true` just as we did [for the silver medal](OBJECTIVE%2013%20-%20Santa%20Vision.md#santa-vision-d).  However, this time we have no web interface available to post the message.   No worries – we can simply use a tool such as [MQTTX](https://mqttx.app/) for this.  We use the `santashelper2024` username and password as our credentials and point it towards `ws://<santavision ip>:9001`.  
 
- 
+![image](https://github.com/user-attachments/assets/2b6991e0-62b5-4869-9522-98c0c8af5847)
+
+![image](https://github.com/user-attachments/assets/53c031c2-0869-4ee4-90bd-1d9bd8063024)
+
+
+Then simply send a message to `santafeed` saying `singleAdminMode=true`.
+
+ ![image](https://github.com/user-attachments/assets/a6bf799c-fad4-4765-acf0-bcdbad046e75)
+
+Now, if we go back to the SantaVision portal and load up the `northpolefeeds` broadcast, we can see Santa riding some cool hovercrafts and we have our answer for the gold medal 😊
+
+ ![image](https://github.com/user-attachments/assets/c239f673-55f5-4593-8df0-25097f671954)
+
+
+
+
 
