@@ -1,4 +1,5 @@
 # OBJECTIVE 5 - Frosty Keypad #
+Difficulty: ❄️
 
 ## OBJECTIVE : ##
 >In a swirl of shredded paper, lies the key. Can you unlock the shredder’s code and uncover Santa’s lost secrets?
@@ -16,7 +17,7 @@
 #  
 
 ## PROCEDURE : ##
-### SILVER MEDAL ###
+### 🥈 SILVER MEDAL ###
 
 Just a few steps away to the right-hand side of the screen there is a book lying on the ground – picking it up adds **‘Frosty Book’** to our inventory and it contains a poem over 14 pages.
 The sticky note stuck to the shredder has five sets of three numbers each.  The first number in each set is between 2 and 14… which kind of reminds us of the number of pages in the book.  So, if the first number in each set refers to the page number, the second and third numbers in each set must refer to the word and letter positions respectively.  So 2:6:1 points to The 1st letter of the 6th word in Page 2, which is ‘*S*’.
@@ -45,7 +46,7 @@ Set|	Corresponding Letter|	Keypad Digit
 
 This unlocks the shredder and allows me to collect a file called `shreds.zip` which appears to contain scanned copies of thin slivers of shredded paper as individual image files. 
 
-### GOLD MEDAL ###
+### 🥇 GOLD MEDAL ###
 There is a UV flashlight hidden behind the stack of gifts just to the left of the shredder.  By using this on the keypad we can see that the numbers 2,6,7 and 8 where used.  Since we know that this is a five-digit pin, we must assume that one of the digits is used twice.
 
 Microsoft CoPolit tells me that there are 960 possible unique combinations_("PROMPT: how many possible unique 5-digit combinations can you create with 4 digits where each digit is used at least once in each combination")_ so we need to find a way of automating this.  Since I got some practice using cURL recently, I decided to use Python to generate the possible 5-digit combinations and `POST` them to the game’s URL using cURL.  I used Microsoft Co-Pilot to help me generate [the Python Code I used for this](Code/frosty_keypad_bruteforce.py).  The code generates the possible combinations and submits each one in the format `{answer:pin}` as a JSON HTTP POST request and listens for a successful response code of `200`. I also included a 2 second delay between each combination attempt, since the server would only accept one request per second.
