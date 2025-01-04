@@ -1,4 +1,5 @@
 # OBJECTIVE 10 - PowerShell #
+Difficulty: ❄️❄️❄️
 
 ## OBJECTIVE : ##
 >Team Wombley is developing snow weapons in preparation for conflict, but they've been locked out by their own defenses. Help Piney with regaining access to the weapon operations terminal.
@@ -17,7 +18,7 @@
 #  
 
 ## PROCEDURE : ##
-### SILVER MEDAL ###
+### 🥈 SILVER MEDAL ###
 The first few questions are pretty straightforward:
 ```powershell
 1) There is a file in the current directory called 'welcome.txt'. Read the contents of this file
@@ -148,7 +149,7 @@ Alabaster can now access their weaponry and put a stop to it.
 Once HHC grants your achievement, you can close this terminal.
 ```
 #
-### GOLD MEDAL ###
+### 🥇 GOLD MEDAL ###
 
 For this next part, I decided it would be best to stick to where the hints are trying to guide me.  First let’s try to replicate the token hashes using `Get-Filehash`.
 
