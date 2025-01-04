@@ -1,5 +1,6 @@
 # OBJECTIVE 2 - Elf Connect #
 Difficulty: ❄️
+
 [Direct Link](https://hhc24-elfconnect.holidayhackchallenge.com/)
 
 ## OBJECTIVE : ##
