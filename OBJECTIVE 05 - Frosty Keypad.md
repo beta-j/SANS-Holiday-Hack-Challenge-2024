@@ -1,6 +1,8 @@
 # OBJECTIVE 5 - Frosty Keypad #
 Difficulty: ❄️
 
+[Direct Link](https://hhc24-frostykeypad.holidayhackchallenge.com)
+
 ## OBJECTIVE : ##
 >In a swirl of shredded paper, lies the key. Can you unlock the shredder’s code and uncover Santa’s lost secrets?
 #  
