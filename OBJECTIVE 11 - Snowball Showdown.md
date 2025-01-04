@@ -42,7 +42,8 @@ In the silver medal we’ve already eliminated the possibility of `elfIds.js` an
 
 This leaves us with the final `.js` file called `reconnecting-websocket.min.js` which also appears to be a standard library, but on closer inspection it seems to have some added code at the end.  The code adds a function which refers to a `MOASB`  (I’m guessing this stands for **_Mother Of All Snowball Bombs_**) and assigns it to `window.bgDebug` which makes it globally accessible via the `bgDebug` property on the `window` object.  The first line of the function is:     
 ```javascript
-if (e.type && "moasb_start" === e.type && mainScene && !mainScene.moasb_started) {```
+if (e.type && "moasb_start" === e.type && mainScene && !mainScene.moasb_started) {
+```
 This checks whether the event `e` has a type property with the value `moasb_start`, if this condition is met the function triggers the MOASB scene.
 
 Now that we’ve identified this crucial bit of code with a client-side exposed property, all we need to do is start a new game, head to the browser’s console and type in `window.bgDebug({type: “moasb_start”})`. Now sit back and enjoy the show as a bomber aircraft flies in carrying the MOASB and launches it with Jared riding it, wielding an axe and using some questionable elf language!
