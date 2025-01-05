@@ -1,5 +1,5 @@
 # SANS-Holiday-Hack-Challenge-2024
-Write Up tackling the Objectives and Challenges of the [SANS Holiday Hack Challenge 2024](https://www.sans.org/mlp/holiday-hack-challenge-2024/) which I submitted on the **2nd January 2025** (Works in Progress)
+Write Up tackling the Objectives and Challenges of the [SANS Holiday Hack Challenge 2024](https://www.sans.org/mlp/holiday-hack-challenge-2024/) which I submitted on the **2nd January 2025** 
 
 ### [PDF Version available to View/Download Here](Assets/ne_James%20Baldacchino%20SANS%20HHC%202024%20WriteUp.pdf) ###
 
@@ -34,4 +34,21 @@ Write Up tackling the Objectives and Challenges of the [SANS Holiday Hack Challe
 [OBJECTIVE 11 - Snowball Showdown](OBJECTIVE%2011%20-%20Snowball%20Showdown.md)
 
 [OBJECTIVE 12 - Microsoft KC7](OBJECTIVE%2012%20-%20Microsoft%20KC7.md)
+
+[OBJECTIVE 13 - Santa Vision](OBJECTIVE%2013%20-%20Santa%20Vision.md)
+
+[OBJECTIVE 14 - Elf Stack](OBJECTIVE%2014%20-%20Elf%20Stack.md)
+
+[OBJECTIVE 15 - Decrypt the Naughty-Nice List](OBJECTIVE%2015%20-%20Decrypt%20the%20Naughty-Nice%20List.md)
+
+[OBJECTIVE 16 - Deativate Frostbit Naughty-Nice List Publication](OBJECTIVE%2016%20-%20Deactivate%20Frostbit%20Naughty-Nice%20List%20Publication.md)
+
+[Ending Epilogue & Thanks](_ENDING%20EPILOGUE%20%26%20THANKS%20.md)
+
+[BONUS OBJECTIVE - Hidden Story](_BONUS%20OBJECTIVE%20-%20Hidden%20Story.md)
+
+[BONUS OBJECTIVE - Finding Jason and the Docks Area](_BONUS%20OBJECTIVE%20-%20Finding%20Jason%20and%20the%20Docks%20Area.md)
+
+
+
 
