@@ -1,4 +1,4 @@
-# BONUS OBJECTIVE - Hidden Story#
+# BONUS OBJECTIVE - Hidden Story #
 
 
 When we retrieve the strips of paper from the shredder in [Objective 5 – Frosty Keypad](OBJECTIVE%2005%20-%20Frosty%20Keypad.md) we get a zip file with _“one thousand little tiny shredded pieces of paper—each scrap whispering a secret, waiting for the right hardware hacker to piece the puzzle back together!”_.  We were able to piece these together for [Objective 6](OBJECTIVE%2006%20-%20Hardware%20Hacking%20101%20(Part%201).md), but that’s not the only hidden message they hold!
