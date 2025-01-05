@@ -8,7 +8,7 @@ Difficulty: ❄️❄️❄️❄️❄️
 
 ## HINTS: ##
 <details>
-  <summary>Hints provided for Objective 14</summary>
+  <summary>Hints provided for Objective 15</summary>
   
 >-  The Frostbit infrastructure might be using a reverse proxy, which may resolve certain URL encoding patterns before forwarding requests to the backend application. A reverse proxy may reject requests it considers invalid. You may need to employ creative methods to ensure the request is properly forwarded to the backend. There could be a way to exploit the cryptographic library by crafting a specific request using relative paths, encoding to pass bytes and using known values retrieved from other forensic artifacts. If successful, this could be the key to tricking the Frostbit infrastructure into revealing a secret necessary to decrypt files encrypted by Frostbit.
 >-	I'm with the North Pole cyber security team. We built a powerful EDR that captures process memory, network traffic, and malware samples. It's great for incident response - using tools like strings to find secrets in memory, decrypt network traffic, and run strace to see what malware does or executes.
@@ -19,236 +19,109 @@ Difficulty: ❄️❄️❄️❄️❄️
 #  
 
 ## PROCEDURE : ##
-### 🥈 SILVER MEDAL ###
 
-Once Elastic search is up and running go to **_Analytics -> Discover_** and we can start answering questions:
+We start this challenge with five files; `naughty_nice_list.csv.frostbit`, `frostbit.elf`, `frostbit_core_dump.13`, `DoNotAlterOrDeleteMe.frostbit.json` and `ransomware_traffic.pcap`.
 
-**Question 1:** _How many unique values are there for the event_source field in all logs?_
+We can open the `ransomware_traffic.pcap` file in [Wireshark](https://www.wireshark.org/) and see that it’s a relatively small file which shows an encrypted TLS session.  Next, we can use the `strings` command on `frostbit_core_dump.13` and read through the output.  One of the chunks of text that stands out contains the client and server TLS secrets.
 
-Search for `event_source: *` then click on the **edit visualization** button at the top right and set the vertical axis to **unique count of event_source**.  There are <ins>**5**</ins> values for `event_sourc`e called `WindowsEvent`, `NetflowPmacct`, `GreenCoat`, `SnowGlowMailPxy` and `AuthLog`.
-
-![image](https://github.com/user-attachments/assets/34bc31d8-5a5f-41b3-8928-59a99160a9ee)
-
-**Question 2:** _Which event_source has the fewest number of events related to it?_
-
-On the same visualisation we can simply change the vertical axis to show **Count of event_source** and we can see that the `event_source` with the least events related to it is <ins>**AuthLog**</ins> with 265 events.
-
-**Question 3:**_ Using the event_source from the previous question as a filter, what is the field name that contains the name of the system the log event originated from?_
-
-Back in the **Discover** screen we can open any one of the events and scroll through the available fields until we see a field called <ins>**hostname**</ins>.
-
-**Question 4:** _Which event_source has the second highest number of events related to it?_
-
-We can use the same visualisation we used for **Q2**, to determine that the `event_source` with the second highest number of events is <ins>**Netflowpmacct**</ins> with 34,679 events.
-
-**Question 5:** _Using the event_source from the previous question as a filter, what is the name of the field that defines the destination port of the Netflow logs?_
-
-In the **Discover** screen we filter for ``event_source : “NetflowPmacct”`` and open any one of the events to see a field called <ins>**event.port_dst**</ins> which contains the destination port number.
-
-**Question 6:**_ Which event_source is related to email traffic?_
-
-This is quite obvious from the name of the event; <ins>**SnowGlowMailPxy**</ins> is the event source related to email traffic.
-
-**Question 7:** _Looking at the event source from the last question, what is the name of the field that contains the actual email text?_
-
-Filter for ``event_source : “SnowGlowMailPxy”`` and open any one of the events. <ins>**event.Body**</ins> contains the body of the emails.
-
-**Question 8:** _Using the 'GreenCoat' event_source, what is the only value in the hostname field?_
-
-Filter for ``event_source : “GreenCoat”`` and open any one of the events to see that the hostname is <ins>**SecureElfGwy**</ins>.
-
-**Question 9:** _Using the 'GreenCoat' event_source, what is the name of the field that contains the site visited by a client in the network?_
-
-Similarly to **Q8** we can see that the field called <ins>**event.url**</ins> contains the site visited by the client.
-
-**Question 10:**_ Using the 'GreenCoat' event_source, which unique URL and port (URL:port) did clients in the TinselStream network visit most?_
-
-We can create a visualisation that plots the top five values of `event.url` against the number of records for each one and we find that the most visited URL is <ins>**pagead2.googlesyndication.com:443**</ins>.
-
-![image](https://github.com/user-attachments/assets/47e132f6-8924-4ed6-9b3b-0f8a20915633)
-
-**Question 11:** _Using the 'WindowsEvent' event_source, how many unique Channels is the SIEM receiving Windows event logs from?_
-
-Filter for ``event_source: “WindowsEvent” and event.Channel : *`` , edit the visualisation and plot Top 10 values of `event.Channel` and we see that we only have <ins>**5**</ins> channels; `Security`, `Microsoft-Windows-Sysmon/Operational`, `Microsoft-Windows-PowerShell/Operational`, `System` and `Windows PowerShell`
-
-**Question 12:**_ What is the name of the event.Channel (or Channel) with the second highest number of events?_
-
-From the same visualisation we used for **Q11** we see that the channel with the second highest number of events is <ins>**Microsoft-Windows-Sysmon/Operational**</ins> with 17,421 records.
-
-**Question 13:** _Our environment is using Sysmon to track many different events on Windows systems. What is the Sysmon Event ID related to loading of a driver?_
-
-A quick [Goole Search](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=90006) tells us that the Sysmon event ID for “Driver Loaded” is <ins>**6**</ins>.
-
-**Question 14:** _What is the Windows event ID that is recorded when a new service is installed on a system?_
-
-Similarly, we can [use Google](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4697) to determine that the Sysmon event ID for this is <ins>**4697**</ins>.
-
-**Question 15:** _Using the WindowsEvent event_source as your initial filter, how many user accounts were created?_
-
-Filter for ``event_source: “WindowswEvent” and event.EventID : 4720``  and there are no results so the answer to this question is <ins>**0**</ins>.
-
-
-### 🥇 GOLD MEDAL ###
-
-**Question 1:** _What is the event.EventID number for Sysmon event logs relating to process creation?_
-
-A quick [Google Search](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=90001) tells us the answer is <ins>**1**</ins>.  
-
-**Question 2:** _How many unique values are there for the 'event_source' field in all of the logs?_
-
-We already answered this in **Q1 of Easy Mode**, it’s <ins>**5**</ins>.
-
-**Question 3:** _What is the event_source name that contains the email logs?_
-
-We already answered this in **Q6 of Easy Mode**, it’s <ins>**SnowGlowMailPxy**</ins>.
-
-**Question 4:** _The North Pole network was compromised recently through a sophisticated phishing attack sent to one of our elves. The attacker found a way to bypass the middleware that prevented phishing emails from getting to North Pole elves. As a result, one of the Received IPs will likely be different from what most email logs contain. Find the email log in question and submit the value in the event 'From:' field for this email log event._
-
-Looking through the logs in `SnowGlowMailPxy`, we can see that the value for `ReceivedIP1` and `ReceivedIP2` are usually from the `172.24.25.0 /24` network range, so we can filter for anything outside this network using the following filter:
-```kql
-event_source : “SnowFlowMailPxy” and ((NOT event.ReceivedIP1 : 172.24.25.*) or (NOT event.ReceivedIP2 : 172.24.25.*))
 ```
-This returns an email log for an email received from <ins>**kriskring1e@northpole.local**</ins>.
+┌──(root㉿kali)-[/home/Objective 15-16 - Frostbit]
 
-![image](https://github.com/user-attachments/assets/5808a16f-42f0-4cfa-a0e8-c20697eced1f)
+└─# **strings frostbit_core_dump.13**
 
-**Question 5:** _Our ElfSOC analysts need your help identifying the hostname of the domain computer that established a connection to the attacker after receiving the phishing email from the previous question. You can take a look at our GreenCoat proxy logs as an event source. Since it is a domain computer, we only need the hostname, not the fully qualified domain name (FQDN) of the system._
+<...REDACTED FOR BREVITY...>
 
-Filter for ``event_source : “GreenCoat” and event.url : *hollyhaven*`` and we get a single entry with an `event.host` value of <ins>**SleighRider**</ins>.
+CLIENT_HANDSHAKE_TRAFFIC_SECRET 6f8f7498f76b53f79a18f62bd71c597c28967262c32f5a02d7bf5754034bc593 02623bc09772ebc798bff16594bb40b7c016d4120386dded10e2ff762d61dfc0
 
-**Question 6:**_ What was the IP address of the system you found in the previous question?_
+SERVER_HANDSHAKE_TRAFFIC_SECRET 6f8f7498f76b53f79a18f62bd71c597c28967262c32f5a02d7bf5754034bc593 88875ef3f05397f685c5c72c8a4b357f0d48fcbb054d1f8e4d7ce7cb6d942ef1
 
-The event in **Q5** has an event.ip of <ins>**172.24.25.12**</ins>.
+CLIENT_TRAFFIC_SECRET_0 6f8f7498f76b53f79a18f62bd71c597c28967262c32f5a02d7bf5754034bc593 da23c59c5bd11e2dd3851c831e7daf5e8eea12da0657aa3a9dc0c2934d6f0ab1
 
-**Question 7:** _A process was launched when the user executed the program AFTER they downloaded it. What was that Process ID number (digits only please)?_
+SERVER_TRAFFIC_SECRET_0 6f8f7498f76b53f79a18f62bd71c597c28967262c32f5a02d7bf5754034bc593 79f3b178650d0c2f58717c51df8a1eb74b23e92c1b8dec560aaf4b5f10f5dd9e
 
-If we search for Windows Events which include `howtosavexmas` in the Process Name, we get a lot of events with a `ProcessID` of 4 – we can exclude these to find our answer: 
-```kql
-event_source : “WindowsEvent” and event.ProcessName : *howtosavexmas* and event.ProcessID : (NOT 4)
+<...REDACTED FOR BREVITY...>
 ```
-and we find `event.ProcessID` <ins>**10014**</ins>.
 
-**Question 8:**_ Did the attacker's payload make an outbound network connection? Our ElfSOC analysts need your help identifying the destination TCP port of this connection._
+This chunk of text can be copied to a text file (`sslkeylog.txt`) and used to decrypt the TLS stream in Wireshark by going to **Edit** -> **Preferences** -> **Protocols** -> **TLS** and uploading sslkeylog.txt to the field called (**Pre)-Master-Secret log filename**.  We can now follow the TLS stream in Wireshark to see that the server first supplies a `nonce` value, then the client sends an `encryptedkey` value, presumably encrypted with some key file and the supplied nonce.  The server then responds with `digest`, `status` and `statusid` values.
 
-```kql
-event_source : “WindowsEvent” and event.ProcessID : 10014 and event.DestinationPort : * and event.DestinationIp : (NOT 172.24.25.*)
-```  
-This gives us a single event for a connection created by `processID 10014` to an IP outside our network, in this case it’s towards `103.12.187.43` on port <ins>**8443**</ins>.
+The same exchange can be seen in the `strings` output of the core dump file, but it’s missing the nonce – so this must be the most important bit of information we need from the .pcap file.
 
-**Question 9:** _The attacker escalated their privileges to the SYSTEM account by creating an inter-process communication (IPC) channel. Submit the alpha-numeric name for the IPC channel used by the attacker._
+Looking further through the strings output of the core dump, we can also spot an interesting URI; `https://api.frostbit.app/view/lZNUKyHCWKwV/a0870d85-09c6-440a-b878-f7cc8253bf24/status?digest=a000b3838030e94ddc76c21020044712`. This URI appears to be composed of the `statusid` we saw earlier and our [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#:~:text=A%20Universally%20Unique%20Identifier%20(UUID,as%20used%20by%20UEFI%20variables), and it is passing the `digest`  value we saw in the network capture as a parameter.  Following the URI takes us to a **Ransom Note for the Frostbit2.0 Ransomware**.  The page shows a countdown timer and a list of websites that the naughty-nice list will be published to if Wombley’s demands are not met.
 
-Search for `cmd.exe` commands on the hostname `SleighRider.northpole.local`:
-```kql
-event_source : “WindowsEvent” and event.Hostname : *Sleigh* and event.ServiceFileName: *cmd.exe*
+By looking at the source code of the ransom note page, we see that there is a placeholder for debug data included in **line 167**.  The page is looking for debug data to be passed from a server-side script (**lines 172 to 178**).  So, there should be a way of enabling debug mode and viewing this debug data.  We can achieve this by adding `&debug=true` to the end of the URI, now we can see some additional information at the bottom of the ransom page, but no information that we didn’t know already.
+
+Now it’s time to start messing around with the URI to see if we can get the debug data to show us something interesting and useful.  Let’s start by removing a character from the `digest` parameter and we get this error:
+
 ```
-This gives us an event with an `eventID` of `4697` and the following `event.ServiceFileName`: `cmd.exe /c echo ddpvccdbr &gt; \\. \pipe\ddpvccdbr`
-
-**Question 10:** _The attacker's process attempted to access a file. Submit the full and complete file path accessed by the attacker's process._
-
-Filter for `eventID 4663` (_an attempt was made to access an object_) triggered by `processID 10014`:
-```kql
- event_source : “WindowsEvent” and event.EventID : 4663 and event.ProcessID : 10014
+"error": "Status Id File Digest Validation Error: Traceback (most recent call last):\n  File \"/app/frostbit/ransomware/static/FrostBiteHashlib.py\", line 55, in validate\n  decoded_bytes = binascii.unhexlify(hex_string)\nbinascii.Error: Odd-length string\n"
 ```
-This returns a single event with a field value for `event.ObjectName` of <ins>**C:\Users\elf_user02\Desktop\kkringl315@10.12.25.24.pem**</ins>
- 
-**Question 11:** _The attacker attempted to use a secure protocol to connect to a remote system. What is the hostname of the target server?_
 
-We can guess that the secure protocol used is ssh and just search for that in the `AuthLog`:
-```kql
-event_source: “AuthLog” and event.service : *ssh*
+So, the server-side script is expecting the digest to be hexadecimal and therefore to be composed by ASCII character pairs and thus an odd-length string will throw this error.  More importantly, we have a path and filename for the server-side script: `/app/frostbit/ransomware/static/FrostBiteHashlib.py`.
+
+It’s also worth noting that the only other resource called on the ransom note page is the banner image at the top of the page and it is being called from `/static/frostbit.png` (**line 129**) – so it looks like the Python script and the banner image might just be in the same `/static` directory.  We can therefore simply point our browser towards `https://api.frostbit.app/static/FrostBiteHashlib.py` to download the server-side Python script.
+
+Now we can have a closer look at what the script is doing.  Its main purpose appears to be to generate the hash value that is being used for the `digest` parameter.  The hash is being generated based on the contents of the file to be served (`file_bytes`), the file name (`filename_bytes`) and the nonce (`nonce_bytes`).  We can also see in **line 5** that the hash has a fixed length of 16 bytes.
+
+**Lines 14 to 29** determine how the hash is calculated.  The algorithm starts with hash that is all zeroes.  First it performs an XOR function with the file contents and the nonce and then performs another XOR function with the resulting byte array and the stored hash value.  This is repeated for each byte in the file with the nonce being repeated over and over for the XOR operation.  The algorithm then does something similar with the file name, performing an XOR operation between the file name and the nonce, but then instead of performing another XOR with the stored hash value, it performs an AND operation.
+
+This is a critical flaw in this algorithm for one specific edge case – when the first 16-byte values for the file name and nonce are identical and in the same position in the algorithm’s loop.  In this case the XOR operation will return a string of `0`s and any AND operation with a string of `0`s will also result in a string of `0`s.  This means that if we can get the nonce and the file name to be identical at some point and collide, we will get an all-zero hash value.  Since the hash is a 16-byte value, and the nonce is 8 bytes, we need to repeat the nonce twice.  We may also need to add some padding to the file name to get it to align perfectly with the nonce depending on the length of the file.  We can test out this hypothesis by adding some extra code to the end of the `FrostBiteHashlib.py` script:
+
+```python
+file_bytes = b"testdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdata"
+
+filename_bytes = bytes.fromhex("aaaaaaaaaaaaaaaaaabf57c4e5ed6cb751bf57c4e5ed6cb751e5ed6e5ed6e5ed6e5ed6")
+
+nonce_bytes = bytes.fromhex("bf57c4e5ed6cb751")
+
+frostbyte = Frostbyte128(file_bytes, filename_bytes, nonce_bytes)
+
+print(f"HexDigest: {frostbyte.hexdigest()}")
 ```
-The hostname we find from this is <ins>**kringleSSleigH**</ins>.
 
-**Question 12:**_ The attacker created an account to establish their persistence on the Linux host. What is the name of the new account created by the attacker?_
+In this example I used a random string of data for the `file_bytes` variable and then created a file name composed as follows: **{padding}{nonce}{nonce}{extra data}**.  I used `aa` bytes for padding and added these until the output gave me an all-zero hash.  The amount of padding needed will vary depending on the number of bytes in the file, but it can never be more than 16 bytes.
 
-Filter for `*useradd*` which is the Linux command used to create a new user.  We get a single event telling us that the user account created is <ins>**ssdh**</ins> on Sep 16, 2024 @ 16:59:46.000.
+OK, now back to the ransom note – this time let’s try messing with the `statusid` portion of the URI.  If we add or remove characters to the `statusid` (with debug still turned on), we get the following error: `"error": "Status Id File Not Found"`.
 
-![image](https://github.com/user-attachments/assets/f8c54932-7298-4c0f-9add-bb724e8e392d)
+From this output it looks like the value of `statusid` instructs the server on which file to fetch, could it be possible to use this functionality to perform a path traversal attack and output the contents of any file on the server?  We can test out this idea by trying to access a known file, such as the banner of the ransom note page; `frostbit.png` in this way.
 
-**Question 13:** _The attacker wanted to maintain persistence on the Linux host they gained access to and executed multiple binaries to achieve their goal. What was the full CLI syntax of the binary the attacker executed after they created the new user account?_
+To do this we need to replace the `statusid` portion of the URI with a relative file path like `../static/frostbit.png`.  However, it’s not going to be that simple as the server will take any `/` characters in the URI as pointing to other paths of the website rather than other directories on the web server itself.  We need to pass the whole file path in a way that will cause the web server to process it as a filename.  If we try to URL-encode the `/` characters as `%2F`, it doesn’t work either. One of the hints suggests that the web server is behind a proxy that resolves “_certain URL encoding patterns before forwarding requests to the backend application_”.  This means that when we pass `%2F` in the URI, the reverse proxy is converting this back to a `/` before passing it on to the webserver.  The trick to getting past this obstacle is to URL-encode `%2F` (effectively _double_ URL-encoding each `/` character) thus replacing it with `%252F`. `%25` is the URL-encoded value for the `%` symbol, so this time when we pass `%252F` to the reverse proxy, it will resolve it to `%2F` and pass on a URL-encoded `/` character to the backend application.
 
-We can have a look at some more commands that were executed over this ssh connection by filtering out events that contain `COMMAND` in the message and that happened after the `ssdh` user was created:
-```kql
- hostname : “kringleSSleigH” and @ timestamp >= “2024-09-16T13:59:45.985591” and event.message : *COMMAND*
-```
-By sorting the resulting events chronologically, we can see that a sequence of commands was executed, the first one being <ins>**/usr/sbin/usermod -a -G sudo ssdh**</ins>
+Having figured all of that out we can now try making a call to `https://api.frostbit.app/view/..%252Fstatic%252Ffrostbit.png/**{UUID}**/status?digest={DIGEST}&debug=true`  and we get a beautiful error message saying that we have an incorrect digest.  This is a good sign, because normally just by changing the `statusid` arbitrarily we’d get a “_file not found_” error, but this new error means that the relative file path we provided was correctly processed, the file <ins>_was_</ins> found, but the server is refusing to show it to us because we are supplying the wrong digest – but based on what we learned from the python script so far, we should be able to get around that too now.
 
-**Question 14:** _The attacker enumerated Active Directory using a well known tool to map our Active Directory domain over LDAP. Submit the full ISO8601 compliant timestamp when the first request of the data collection attack sequence was initially recorded against the domain controller._
+There is one more thing that we can observe by playing around with the `statusid` portion of the URI.  That is that nginx allows us to enter any directory – even one that doesn’t exist, as long as we leave it again with `../`.  So for example, to access `frostbit.png` we can use the path `foobar/../../static/frostbit.png` and we will get the same result as for `../static/frostbit.png`, so the URL would look something like this: `https://api.frostbit.app/view/foobar%252F..%252F..%252Fstatic%252Ffrostbit.png/**{UUID}**/status?digest=**{DIGEST}**&debug=true`.
 
-This took me a while to figure out, trying to search for all sorts of AD enumeration tools.  Eventually I searched for all [LDAP bind events](https://www.manageengine.com/products/active-directory-audit/kb/system-events/event-id-2889.html) using windows event ID `2889` and sorted the results chronologically to retrieve the oldest record. So by applying the filter ``Event.EventID : 2889``, we find that the first request happened on `Event.Date` = <ins>**2024-09-16T11:10:12-04:00**</ins>
+But, what file should we actually by trying to fetch from the server?  You may recall a reference to the **Frostbit API** in an earlier Objective.  In fact, in [Objective 13 – Santa Vision](#OBJECTIVE%2013%20-%20Santa%20Vision.md), [one of the MQTT streams](OBJECTIVE%2013%20-%20Santa%20Vision.md) gives us an interesting file path: `/etc/nginx/certs/api.frostbit.app.key`.
 
-**Question 15:** _The attacker attempted to perform an ADCS ESC1 attack, but certificate services denied their certificate request. Submit the name of the software responsible for preventing this initial attack._
+In our case the file path needs to be relative to where our python script is stored.  We know that the python script is in `/app/frostbit/ransomware/static` directory, so we need at least four `../` to go back to `root` and another `../` to escape the false directory name composed of **{nonce}{nonce}**, so `/../../../../../etc/nginx/certs/api.frostbit.app.key`.
 
-We can search for [Windows Event ID 4888 – Certificate Services denied a certificate request](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4888): `Event.EventID : 4888` returns a single document.  In the document’s `event.ReasonForRejection` field we find “<ins>**KringleGuard**</ins> EDR flagged the certificate request.”
+The **{nonce}** values need to be passed as hex in the URI.  Normally we’d achieve this by prepending each hex byte pair with a `%` symbol, but just like we did with the file path, we need to _double_ URL encode hex values and represent each `%` symbol as `%25` instead.
 
-**Question 16:** _We think the attacker successfully performed an ADCS ESC1 attack. Can you find the name of the user they successfully requested a certificate on behalf of?_
+To summarise everything, essentially what needs to be done is to construct a URI that looks something like this:
 
-I found [this article by Beyond Trust](https://www.beyondtrust.com/blog/entry/esc1-attacks) to be very helpful in answering this question.  The article suggests that to detect an ADCS ESC1 attack we should focus on Event IDs `4886` and `4887`.  If we apply the filter `event.EventID : 4886` in ELK, it returns a single document showing that a certificate was granted to <ins>**nutcrakr@northpole.local**</ins>.
+$${https://api.frostbit.app/view/\color{purple}\{padding\}\color{blue}\{nonce\}\{nonce\}\color{red}\{filepath\}/\{UUID\}/ status?digest=**00000000000000000000000000000000**\&debug=true}$$
 
-**Question 17:**_ One of our file shares was accessed by the attacker using the elevated user account (from the ADCS attack). Submit the folder name of the share they accessed._
+Keep in mind that **{filepath}** needs to have an extra `../` at the beginning to exit the false directory we are passing as **{padding}{nonce}{nonce}**.
 
-We can use the newly-discovered username to search for events along with a string such as `\\` (remembering to escape each `\` character) to find references to network share locations:
-```kql
-event.SubjectUserName : “nutcrakr” and \\\\*
-```
-By looking at the contents of the `event.ShareName` field we can see that the attacker first accessed the share called <ins>**\\*\WishLists**</ins>.
+Here are the individual components and how they were constructed in the URI:
 
-**Question 18:** _The naughty attacker continued to use their privileged account to execute a PowerShell script to gain domain administrative privileges. What is the password for the account the attacker used in their attack payload?_
+**{nonce}{nonce}** : ${\texttt{\color{blue}bf57c4e5ed6cb751bf57c4e5ed6cb751}}$
 
-For some reason I wasn’t able to get to the answer of this question through Kibana, it looks like some logs were not parsed properly – which is maybe what one of the hints is referring to.  However, I was able to search for log entries that included `nutcrakr` and `New-Object` to detect possible powershell scripts that were executed by `nutcrakr`:
-```bash
-# cat log_chunk_2.log | grep nutcrakr | grep New-Object -i
-```
-This returns a log entry that includes ``Admins,CN=Users,DC=northpole,DC=local\"\n$username = \"nutcrakr\"\n$pswd = 'fR0s3nF1@k3_s'``
+URL encoded **{nonce}{nonce}**: ${\texttt{\color{blue}\%bf\%57\%c4\%e5\%ed\%6c\%b7\%51\%bf\%57\%c4\%e5\%ed\%6c\%b7\%51}}$
 
-**Question 19:** _The attacker then used remote desktop to remotely access one of our domain computers. What is the full ISO8601 compliant UTC EventTime when they established this connection?_
+_Double_ URL encoded **{nonce}{nonce}**: ${\texttt{\color{blue}\%25bf\%2557\%25c4\%25e5\%25ed\%256c\%25b7\%2551\%25bf\%2557\%25c4\%25e5\%25ed\%256c\%25b7\%2551}}$
 
-To answer this, we can filter for [event ID 4624 (successful logon attempts)](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4624) with a [logon type of 10 (remote interactive)](https://learn.microsoft.com/en-us/windows-server/identity/securing-privileged-access/reference-tools-logon-types):
-```kql
- event.EventID : 4624 and event.LogonType : 10
-```
-This returns a single event with the timestamp: <inis>**2024-09-16T15:35:57.000Z**</ins>
+**{filepath}**: ${\texttt{\color{red}/../../../../../etc/nginx/certs/api.frostbit.app.key}}$
 
-This log entry indicates that the user `nutcrakr` successfully established a Remote Desktop (RDP) connection to the computer `dc01.northpole.local` from the IP address `10.12.25.24`. The logon type `10` confirms that it was a _RemoteInteractive_ logon, typically associated with RDP sessions.
+URL encoded **{filepath}**: ${\texttt{\color{red}\%2F..\%2F..\%2F..\%2F..\%2F..\%2Fetc\%2Fnginx\%2Fcerts\%2Fapi.frostbit.app.key}}$
 
-**Question 20:** _The attacker is trying to create their own naughty and nice list! What is the full file path they created using their remote desktop connection?_
+Double URL encoded **{filepath}**:
 
-We know that the username is `nutcrak`r and that they accessed the `WishLists` fileshare so we can try filtering for all events that include `nutcrakr` and `WishLists`: 
-```kql
-*nutcrakr* and *WishLists*
-```
-The `event.CommandLine` field for the most recent event shows us `C:\Windows\system32\NOTEPAD.EXE `<ins>**C:\WishLists\santadms_only\its_my_fakelst.txt**</ins>
+${\texttt{\color{red}\%252F..\%252F..\%252F..\%252F..\%252F..\%252Fetc\%252Fnginx\%252Fcerts\%252Fapi.frostbit.app.key}}$
 
-**Question 21:** _The Wombley faction has user accounts in our environment. How many unique Wombley faction users sent an email message within the domain?_
+In my case I didn’t need to add any padding characters, but if required you can add characters before the nonces, one at a time until the URI resolves.  The final URI when putting everything together looks like this (The blue part is the nonce and the red part is the relative file path):
 
-Apply the following filter to find any email with a **From** address that starts with `wc`:
-```kql
-event_source : “SnowGlowMailPxy” and event.From : wc* and event.To : *northpole.local
-```
-Now look at the Field Statistics tab and there are <ins>**4**</ins> distinct values for `event.From`; `wcube311`, `wcub303`, `wcub808` and `wcub101`
+${\texttt{https://api.frostbit.app/view/\color{blue}\%25bf\%2557\%25c4\%25e5\%25ed\%256c\%25b7\%2551\%25bf\%2557\%25c4\%25e5\%25ed\%256c\%25b7\%2551\color{red}\%252F..\%252F..\%252F..\%252F..\%252F..\%252Fetc\%252Fnginx\%252Fcerts\%252Fapi.frostbit.app.key\color{black}/a0870d85-09c6-440a-b878-f7cc8253bf24/status?digest=**00000000000000000000000000000000**\&debug=true}}$
 
-**Question 22:** _The Alabaster faction also has some user accounts in our environment. How many emails were sent by the Alabaster users to the Wombley faction users?_
+This URI displays the contents of `api.frostbit.app.key` in the debug data area of the ransom note page and we can copy the text and save it to a `.key` file.
 
-Similarly to the previous question, we can use the following filter to find emails sent to any address starting with `wc` from any address starting with `as`:
-```kql
- event_source : “SnowGlowMailPxy” and event.From : as* and event.To : wc*
-```
- Then look at the Field Statistics tab and there are <ins>**22**</ins> returned mail events.
-
-**Question 23:** _Of all the reindeer, there are only nine. What's the full domain for the one whose nose does glow and shine? To help you narrow your search, search the events in the 'SnowGlowMailPxy' event source._
-
-The reindeer “_whose nose does glow_” is of course **Rudolph**, so we can filter for any mail records that contain the string `Rudolph`:
-```kql
-event_source : “SnowGlowMailPxy” and *Rudolph*
-```
-If we scroll to through the results, one of the emails sticks out because it has a Rudolph-related domain: <ins>**RudolphRunner@rud01ph.glow**</ins>.
-
-**Question 24:** _With a fiery tail seen once in great years, what's the domain for the reindeer who flies without fears? To help you narrow your search, search the events in the 'SnowGlowMailPxy' event source._
-
-The riddle in the question is referring to **Comet** which is the name of one of Santa’s reindeer as well as a cosmic event with a “Fiery tail”.  The problem is that many of the domains we’ve seen in the `SnowGlowMailPxy` logs are written in _leetspeak_, so we need to search for a number of different possible ways of writing `comet`:
-```kql
-event_source : "SnowGlowMailPxy" and event.From : *comet* or event.From : *c0met* or event.From : *c0m3t*
-```
-With this filter we find that our answer is <ins>**c0m3t.halleys**</ins>.
-
-
+Just for fun we can also try looking at the contents of `/etc/passwd`, `/etc/shadow` and `/etc/os-release` using the same method (adjusting the number of padding characters before the nonces each time):
