@@ -7,8 +7,6 @@ Write Up tackling the Objectives and Challenges of the [SANS Holiday Hack Challe
 
 ## TABLE OF CONTENTS: ##
 
-[Directory]()
-
 [Narrative]()
 
 [OBJECTIVE 1 - Holiday Hack Orientation](OBJECTIVE%2001%20-%20Holiday%20Hack%20orientation.md)
