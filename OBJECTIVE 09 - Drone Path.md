@@ -24,11 +24,11 @@ Having logged-in successfully we now have access to some new areas:
 -	**Profile Page** with details about the elf with the username `fritjolf` – there’s also an interesting link to a csv file 
 -	**Admin console** which requires us to provide a drone fleet administration code
   
-Let’s start off by downloading the csv file that is linked under the profile section.  According to the note on the same profile page , the name of the drone is the same as the location of the secret snowball warehouses.
+Let’s start off by downloading [the csv file that is linked under the profile section](Assets/Preparations-drone-name.csv).  According to the note on the same profile page , the name of the drone is the same as the location of the secret snowball warehouses.
 
 ![image](https://github.com/user-attachments/assets/ff492e68-bf0e-4178-bf94-4ee897169133)
 
-The csv file consists of a number of lat/long coordinate sets and the associated flight altitude at each point.  We can use these to create [our own .kml file](Code/secret-Path.kml) and open it in Google Earth again.
+The [csv file](Assets/Preparations-drone-name.csv) consists of a number of lat/long coordinate sets and the associated flight altitude at each point.  We can use these to create [our own .kml file](Code/secret-Path.kml) and open it in Google Earth again.
 
 If we follow the flight path from one coordinate to the next, we see that each coordinate is on top of a geographical feature that resembles a letter of the alphabet.  We get `ELF-HAWK` which must be the name of the drone.  We can check this on the Elf Drone Workshop page:
 ![image](https://github.com/user-attachments/assets/0ba78a60-c1de-4587-b1cb-7736fd4feecc)
