@@ -33,9 +33,9 @@ The csv file consists of a number of lat/long coordinate sets and the associated
 If we follow the flight path from one coordinate to the next, we see that each coordinate is on top of a geographical feature that resembles a letter of the alphabet.  We get `ELF-HAWK` which must be the name of the drone.  We can check this on the Elf Drone Workshop page:
 ![image](https://github.com/user-attachments/assets/0ba78a60-c1de-4587-b1cb-7736fd4feecc)
 
-And we are now pointed to a new csv file `ELF-HAWK-dump.csv`.  It’s interesting how **LONG** and **LATTER** are capitalised – I’m guessing this is a hint referring to the LAT/LONG values in the csv.
+And we are now pointed to a new csv file [ELF-HAWK-dump.csv](Assets/ELF-HAWK-dump.csv).  It’s interesting how **LONG** and **LATTER** are capitalised – I’m guessing this is a hint referring to the LAT/LONG values in the csv.
 
-Opening the csv file we are now faced with another list of coordinate points, but this time the list is huge with a total of 3272 individual points!
+Opening [the csv file](Assets/ELF-HAWK-dump.csv) we are now faced with another list of coordinate points, but this time the list is huge with a total of 3272 individual points!
 
 We can do the same thing we did earlier and convert these to a `.kml` file.  The easiest way is to clean up the `.csv` file by removing the headers and anything that is not longitude or latitude data.  This leaves us with a file containing comma-separated values for longitude and latitude which we simply paste into a text editor to create a custom `.kml` file.
 
