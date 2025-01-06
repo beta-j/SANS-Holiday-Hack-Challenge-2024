@@ -21,7 +21,10 @@ Difficulty: ❄️❄️
 
 ## PROCEDURE : ##
 ### 🥈 SILVER MEDAL ###
-For this objective we are given an .apk file with a mobile application.  Just to see what it does, we can install it on an android phone (or an emulator).  Next let’s try and figure out who got left off the Naughty/Nice list.  Let’s start by decompiling the apk file using apktooL:
+For this objective we are given [an .apk file with a mobile application](Assets/SantaSwipe.apk).  Just to see what it does, we can install it on an android phone (or an emulator).  Next let’s try and figure out who got left off the Naughty/Nice list.  
+
+
+Let’s start by decompiling the apk file using apktooL:
 ```console
 ┌──(kali㉿kali)-[/tmp/mobapp]
 └─$ apktool d SantaSwipe.apk
@@ -47,7 +50,7 @@ smali_classes3/com/northpole/santaswipe/MainActivity$WebAppInterface.smali:    c
 
 ### 🥇 GOLD MEDAL ###
 
-For the gold medal part of this objective, we are given a revised mobile app – this time in `.aab` format.  Since we already have a general idea of how the app works from obtaining the silver medal, we should try to repeat our steps, but first we should take the advice of one of the hints we’re given and convert the `.aab` file into `.apk`.
+For the gold medal part of this objective, we are given [a revised mobile app – this time in `.aab` format](Assets/SantaSwipeSecure.aab).  Since we already have a general idea of how the app works from obtaining the silver medal, we should try to repeat our steps, but first we should take the advice of one of the hints we’re given and convert the `.aab` file into `.apk`.
 
 I decided to use bundletool to do this:
 ```console
