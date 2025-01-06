@@ -9,7 +9,7 @@ Difficulty: ❄️❄️❄️
 
 ## PROCEDURE : ##
 ### 🥈 SILVER MEDAL ###
-When accessing the terminal, we can either access a login screen or a fileshare.  Given that we don’t have any login credentials (yet), let’s have a look at the fileshare.  There is a single file we can download called `fritjolf-Path.kml`.
+When accessing the terminal, we can either access a login screen or a fileshare.  Given that we don’t have any login credentials (yet), let’s have a look at the fileshare.  There is a single file we can download called [fritjolf-Path.kml](Assets/fritjolf-Path.kml).
 
 Kml files typically store a number of coordinates in sequence to create a path between each point.  The most popular program to open such files is [Google Earth](https://earth.google.com/web/).  If we download the file and open it in Google Earth we can see what is presumably a flight path which interestingly describes the outline of a word: `GUMDROP1` over Antartica:
 ![image](https://github.com/user-attachments/assets/058d2439-321b-49ed-91bd-006d22a04906)
