@@ -137,7 +137,7 @@ Once Jefferson outputs the contents of the .bin file to a directory, this object
 
 ![image](https://github.com/user-attachments/assets/73cf4dee-6365-493b-ad33-8a687c154f70)
  
-Once again, we can download this by simply appending the full path to the Santa Vision URL in the browser (or use `wget`).  All that remains is for us to open the file in `sqlite3` and look at the contents of the `users` table to get the username and password for `SantaSiteAdmin`!
+Once again, [we can download this](Assets/SantasTopSecretDB-2024-Z.sqlite) by simply appending the full path to the Santa Vision URL in the browser (or use `wget`).  All that remains is for us to open [the file](Assets/SantasTopSecretDB-2024-Z.sqlite) in `sqlite3` and look at the contents of the `users` table to get the username and password for `SantaSiteAdmin`!
 
 ```bash
 ┌──(root㉿kali)-[/media/sf_SANS_Holiday_Hack_2024/Objective 13 - Santa Vision]
