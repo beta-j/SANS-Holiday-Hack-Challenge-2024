@@ -92,5 +92,7 @@ With all this information at hand, we can make a simple curl POST request with o
 
 I used [a simple Python Script](Code/hardware_hacking_bruteforce.py) for this (repurposing part of what I used for brute-forcing the Frosty Keypad). After running the code, I can see that I was awarded the gold medal for the challenge – hooray!
 
-
+#
+[<<< Previous Objective (05 - Frosty Keypad)](OBJECTIVE%2005%20-%20Frosty%20Keypad.md)|.........................................................| [Next Objective (07 - Hardware Hacking 101 - Part 2) >>>](OBJECTIVE%2006%20-%20Hardware%20Hacking%20101%20(Part%202).md)|
+:-|--|-:
 
