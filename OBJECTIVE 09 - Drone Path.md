@@ -67,7 +67,7 @@ The capitalised _“TRUE”_ and _“FALSE”_ in that last sentence immediately
 
 Extracting this message is quite simple, but it requires us to play around with the formatting of the `.csv` file.  I used Microsoft Excel to remove all the columns that had data that wasn’t a TRUE/FALSE value.  Then I removed all the rows which were all `TRUE` or all `FALSE` as these will not be able to provide me with any information.  Next I used a simple “find and replace” in Excel to change all the `TRUE` entries into `1`s and all the `FALSE` entries into `0`s.  Finally I used a `CONCAT` function at the end of each row to concatenate all the `0` and `1` values for each row into a 58-bit binary number.
 
-I could then copy and paste the binary numbers into [Cyberchef](https://icyberchef.com/) and use a “From Binary” recipe with an 8-bit byte length to convert the binary into a beautiful piece of ASCII art which also contains our password for the admin panel to grant us a gold medal:
+I could then copy and paste the binary numbers into [Cyberchef](https://icyberchef.com/) and use a “From Binary” recipe with an 8-bit byte length to convert the binary into [a beautiful piece of ASCII](Assets/goldmetal_answer.txt) art which also contains our password for the admin panel to grant us a gold medal:
 
 ![image](https://github.com/user-attachments/assets/55310b81-c2a5-495f-b77d-599ac5dce91f)
 
