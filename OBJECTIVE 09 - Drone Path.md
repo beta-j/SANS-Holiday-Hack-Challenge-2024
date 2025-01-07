@@ -73,6 +73,6 @@ I could then copy and paste the binary numbers into [Cyberchef](https://icyberch
 
 
 #
-[<<< Previous Objective (08 - Mobile Analysis)](OBJECTIVE%2008%20-%20Mobile%20Analysis.md)|.........................................................| [Next Objective (10 - PowerShell >>>](OBJECTIVE%2010%20-%20PowerShell.md)|
+[<<< Previous Objective (08 - Mobile Analysis)](OBJECTIVE%2008%20-%20Mobile%20Analysis.md)|.........................................................| [Next Objective (10 - PowerShell) >>>](OBJECTIVE%2010%20-%20PowerShell.md)|
 :-|--|-:
 
