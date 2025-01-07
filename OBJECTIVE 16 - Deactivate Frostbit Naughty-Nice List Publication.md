@@ -123,3 +123,10 @@ Finally, we can submit our last API call with the retrieved API key in the heade
 We can also confirm that the ransomware has been deactivated by revisiting the ransom note page:
 
 ![image](https://github.com/user-attachments/assets/1d0f658e-d18a-413c-910a-e3ad499b7fa1)
+
+
+
+
+ #
+[<<< Previous Objective (15 - Decrypt the Naughty-Nice List)](OBJECTIVE%2015%20-%20Decrypt%20the%20Naughty-Nice%20List.md)|.........................................................| |
+:-|--|-:
