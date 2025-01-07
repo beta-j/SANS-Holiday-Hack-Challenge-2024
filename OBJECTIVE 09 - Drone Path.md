@@ -72,4 +72,7 @@ I could then copy and paste the binary numbers into [Cyberchef](https://icyberch
 ![image](https://github.com/user-attachments/assets/55310b81-c2a5-495f-b77d-599ac5dce91f)
 
 
+#
+[<<< Previous Objective (08 - Mobile Analysis)](OBJECTIVE%2008%20-%20Mobile%20Analysis.md)|.........................................................| [Next Objective (10 - PowerShell >>>](OBJECTIVE%2010%20-%20PowerShell.md)|
+:-|--|-:
 
