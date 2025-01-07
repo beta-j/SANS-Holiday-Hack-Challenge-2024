@@ -156,3 +156,9 @@ Now we have the key that was presumably used to encrypt the naughty-nice csv fil
 
 
 Finally, we can look inside the decrypted naughty-nice list and find out who is the last child on the list at line number 440, and we find it’s a child called <ins>**Xena Xtreme**</ins> who is listed as having been naughty for having _“a surprise science experiment in the garage and [leaving] a mess with the supplies”_.
+
+
+
+ #
+[<<< Previous Objective (14 - Elf Stack)](OBJECTIVE%2014%20-%20Elf%20Stack.md)|.........................................................| [Next Objective (16 - Deactivate the Naughty-Nice List) >>>](OBJECTIVE%2016%20-%20Deactivate%20Frostbit%20Naughty-Nice%20List%20Publication.md)|
+:-|--|-:
