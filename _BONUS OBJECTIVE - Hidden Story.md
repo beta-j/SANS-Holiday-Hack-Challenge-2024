@@ -54,3 +54,10 @@ However the map led them in endless loops around the Reindeer Academy much to th
 >The Peppermint Grove was alive with its usual enchantments - candy cane trees swayed and sang ancient ballads of epic sleigh battles and the triumphs of Claus’ candy cane squadrons. Twinkle and Jangle joined the peppermint choir, their voices harmonizing with the festive tune. Hours later the duo stumbled upon a hidden cave guarded by giant gumdrop sentinels (luckily on their lunch break). Inside the air shimmered with Claus’ magic.
 >
 >There it was - the Never-Melting Snowflake, glistening on a pedestal of ice. Twinkle’s eyes widened, 'We’ve found it Jangle! The key to infinite marshmallows!' As Twinkle reached for the snowflake, a voice boomed from the cave walls 'One wish, you have. Choose wisely or face the egg-nog of regret.' Without hesitation Jangle exclaimed, 'An endless supply of marshmallows for our cocoa!' The snowflake glowed, and with a burst of magic, marshmallows poured down, covering the cave in a fluffy, sweet avalanche. Back at the workshop, the elves were hailed as heroes - the Marshmallow Knights of Claus. They spent the rest of the season crafting new cocoa recipes and sharing their bounty with all. And so, under the twinkling stars of the northern skies, Twinkle and Jangle continued their adventures, their mugs full of cocoa, their hearts full of joy, and their days full of magic. For in the North Pole, every quest was a chance for festive fun, and every snowflake was a promise of more marshmallows to come.
+
+
+
+ #
+[<<< Previous Objective (16 - Deactivate Frostbit Naughty-Nice List Publication) >>>](OBJECTIVE%2016%20-%20Deactivate%20Frostbit%20Naughty-Nice%20List%20Publication.md)|.........................................................|Next Objective (BONUS OBJECTIVE - Finding Jason) >>>](_BONUS%20OBJECTIVE%20-%20Finding%20Jason.md) |
+:-|--|-:
+
