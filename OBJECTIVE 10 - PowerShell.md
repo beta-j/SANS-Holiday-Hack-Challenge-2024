@@ -209,7 +209,7 @@ Current Token: bd7efda0cb3c6d15dd896755003c635c :   <h1>[-] ERROR: Access Denied
 ```
 
  #
-[<<< Previous Objective (09 - Drone Path)](OBJECTIVE%2009%20-%20Drone%20Path.md)|.........................................................| [Next Objective (11 - Snowball Showdown >>>](OBJECTIVE%2011%20-%20Snowball%20Showdown.md)|
+[<<< Previous Objective (09 - Drone Path)](OBJECTIVE%2009%20-%20Drone%20Path.md)|.........................................................| [Next Objective (11 - Snowball Showdown) >>>](OBJECTIVE%2011%20-%20Snowball%20Showdown.md)|
 :-|--|-:
 
 
