@@ -207,5 +207,9 @@ Current Token: 45ffb41c4e458d08a8b08beeec2b4652 :   <h1>[+] Success, defense mec
 Current Token: d0e6bfb6a4e6531a0c71225f0a3d908d :   <h1>[-] ERROR: Access Denied</h1><br> [!] Logging access attempts
 Current Token: bd7efda0cb3c6d15dd896755003c635c :   <h1>[-] ERROR: Access Denied</h1><br> [!] Logging access attempts
 ```
- 
+
+ #
+[<<< Previous Objective (09 - Drone Path)](OBJECTIVE%2009%20-%20Drone%20Path.md)|.........................................................| [Next Objective (11 - Snowball Showdown >>>](OBJECTIVE%2011%20-%20Snowball%20Showdown.md)|
+:-|--|-:
+
 
