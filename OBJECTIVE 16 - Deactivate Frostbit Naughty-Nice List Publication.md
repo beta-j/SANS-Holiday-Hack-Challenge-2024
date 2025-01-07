@@ -128,5 +128,5 @@ We can also confirm that the ransomware has been deactivated by revisiting the r
 
 
  #
-[<<< Previous Objective (15 - Decrypt the Naughty-Nice List)](OBJECTIVE%2015%20-%20Decrypt%20the%20Naughty-Nice%20List.md)|.........................................................|Next Objective (BONUS OBJECTIVE - Hidden Story) >>>](_BONUS%20OBJECTIVE%20-%20Hidden%20Story.md) |
+[<<< Previous Objective (15 - Decrypt the Naughty-Nice List)](OBJECTIVE%2015%20-%20Decrypt%20the%20Naughty-Nice%20List.md)|.........................................................|[Next Objective (BONUS OBJECTIVE - Hidden Story) >>>](_BONUS%20OBJECTIVE%20-%20Hidden%20Story.md) |
 :-|--|-:
