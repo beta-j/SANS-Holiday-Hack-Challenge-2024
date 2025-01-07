@@ -1,4 +1,4 @@
-# OBJECTIVE 16 - Deativate Frostbit Naughty-Nice List Publication#
+# OBJECTIVE 16 - Deativate Frostbit Naughty-Nice List Publication #
 Difficulty: ❄️❄️❄️❄️❄️
 
 ## OBJECTIVE : ##
