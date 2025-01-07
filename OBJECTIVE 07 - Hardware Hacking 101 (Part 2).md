@@ -122,6 +122,6 @@ sqlite>
 
 
 #
-[<<< Previous Objective (06 - Hardware Hacking 101 - Part 1)](OBJECTIVE%2006%20-%20Hardware%20Hacking%20101%20(Part%201).md)|.........................................................| [Next Objective (08 - Mobile Analysis >>>](OBJECTIVE%2008%20-%20Mobile%20Analysis.md)|
+[<<< Previous Objective (06 - Hardware Hacking 101 - Part 1)](OBJECTIVE%2006%20-%20Hardware%20Hacking%20101%20(Part%201).md)|.........................................................| [Next Objective (08 - Mobile Analysis) >>>](OBJECTIVE%2008%20-%20Mobile%20Analysis.md)|
 :-|--|-:
 
