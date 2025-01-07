@@ -55,3 +55,7 @@ This attack quickly flattens the opposition and grants us a gold medal – **Yip
 ![image](https://github.com/user-attachments/assets/7eae4eff-e7d0-46a1-b865-facec154c119)   ![image](https://github.com/user-attachments/assets/bd2c36aa-f45e-4121-bd03-fd4963aaef13)
 
 
+
+ #
+[<<< Previous Objective (10 - PowerShell)](OBJECTIVE%2010%20-%20PowerShell.md)|.........................................................| [Next Objective (12 - Snowball Showdown >>>](OBJECTIVE%2012%20-%20Microsoft%20KC7.md)|
+:-|--|-:
