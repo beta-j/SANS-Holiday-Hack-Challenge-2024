@@ -267,3 +267,8 @@ ProcessEvents
 S4Q10: What is the name of the property assigned to the new registry key?
 
 ✅ frosty
+
+
+ #
+[<<< Previous Objective (11 - Snowball Showdown)](OBJECTIVE%2011%20-%20Snowball%20Showdown.md)|.........................................................| [Next Objective (13 - Santa Vision >>>](OBJECTIVE%2013%20-%20Santa%20Vision.md)|
+:-|--|-:
