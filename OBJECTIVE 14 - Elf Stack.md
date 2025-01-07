@@ -257,3 +257,8 @@ event_source : "SnowGlowMailPxy" and event.From : *comet* or event.From : *c0met
 With this filter we find that our answer is <ins>**c0m3t.halleys**</ins>.
 
 
+ #
+[<<< Previous Objective (13 - Santa Vision)](OBJECTIVE%2013%20-%20Santa%20Vision.md)|.........................................................| [Next Objective (15 - Decrypt the Naughty-Nice List) >>>](OBJECTIVE%2015%20-%20Decrypt%20the%20Naughty-Nice%20List.md)|
+:-|--|-:
+
+
