@@ -181,6 +181,9 @@ Now, if we go back to the SantaVision portal and load up the `northpolefeeds` br
  ![image](https://github.com/user-attachments/assets/c239f673-55f5-4593-8df0-25097f671954)
 
 
+ #
+[<<< Previous Objective (12 - Microsoft KC7)](OBJECTIVE%2012%20-%20Microsoft%20KC7.md)|.........................................................| [Next Objective (14 - Elf Stack) >>>](OBJECTIVE%2014%20-%20Elf%20Stack.md)|
+:-|--|-:
 
 
 
