@@ -86,9 +86,11 @@ Sixteen elves launched operation: Idemcerybu
 The messages in `santafeed` reveal that both `WombleyC` and `AlabasterS` have `admin` roles and that Santa holds a `superAdmin` role.  We also get a message saying `singleAdminMode=true`.  Based on the objective’s instructions it looks like we need to change this to `false` to only allow a single admin on the system.
 
 We can achieve this quite simply by connecting to the `northpolefeeds` broadcast again and then publishing the message `singleAdminMode=true` to the feed `santafeed`. 
+
 ![image](https://github.com/user-attachments/assets/32efad5e-d6ac-48a1-893a-45bbc718f911)
 
 After a couple of seconds, the images on the monitor start to change and now show Santa riding a pogo stick, which is the answer we are looking for to complete this objective.
+
 ![image](https://github.com/user-attachments/assets/849a4da6-c143-457b-8268-953063951fb6)
 
 
