@@ -1,7 +1,10 @@
 # SANS-Holiday-Hack-Challenge-2024
-Write Up tackling the Objectives and Challenges of the [SANS Holiday Hack Challenge 2024](https://www.sans.org/mlp/holiday-hack-challenge-2024/) which I submitted on the **2nd January 2025** 
+Write Up tackling the Objectives and Challenges of the [SANS Holiday Hack Challenge 2024](https://www.sans.org/mlp/holiday-hack-challenge-2024/) which I submitted on the **2nd January 2025** and for which I was awarded a **Super Honorable Mention**
 
 ### [PDF Version available to View/Download Here](Assets/ne_James%20Baldacchino%20SANS%20HHC%202024%20WriteUp.pdf) ###
+
+![super-honorables](https://github.com/user-attachments/assets/92960e2a-8116-45f3-bc7a-b3d89e00be57)
+
 
 #  
 
