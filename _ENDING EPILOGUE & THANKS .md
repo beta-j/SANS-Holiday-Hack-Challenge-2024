@@ -17,3 +17,9 @@ Very special thanks to the following people on Discord who gave up some of their
 -	legacyboy_
 -	mciantar
 -	pahtzo
+
+
+
+ #
+[<<< Previous Objective (16 - Deactivate Frostbit Naughty-Nice List Publication)](OBJECTIVE%2016%20-%20Deactivate%20Frostbit%20Naughty-Nice%20List%20Publication.md)|.........................................................|[Next Objective (BONUS - Hidden Story) >>>](_BONUS%20OBJECTIVE%20-%20Hidden%20Story.md) |
+:-|--|-:
